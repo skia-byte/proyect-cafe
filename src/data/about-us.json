@@ -1,0 +1,58 @@
+{
+  "team": [
+    {
+      "id": 1,
+      "name": "Kiara Sandoval",
+      "role": "Encargada de Imagen y Experiencia del Cliente",
+      "description": "Kiara se asegura de que cada detalle visual y sensorial de Café Aroma refleje nuestra esencia: desde el diseño del local hasta la atención personalizada que reciben nuestros clientes.",
+      "photo": ""
+    },
+    {
+      "id": 2,
+      "name": "Fabiana Lázaro",
+      "role": "Responsable de Tecnología y Plataforma Digital",
+      "description": "Fabiana gestiona toda la presencia digital de Café Aroma, incluyendo el desarrollo de nuestra página web, pedidos en línea y comunicación con clientes a través de canales digitales.",
+      "photo": ""
+    },
+    {
+      "id": 3,
+      "name": "Noemi Alca",
+      "role": "Coordinadora de Contenido y Comunidad",
+      "description": "Noemi crea y gestiona el contenido que conecta con nuestra comunidad cafetera: desde publicaciones en redes sociales hasta campañas que celebran el café y sus historias.",
+      "photo": ""
+    }
+  ],
+  "company": [
+    {
+      "founded": 2023,
+      "location": "Lima, Perú",
+      "employees": 30
+    }
+  ],
+  "values": [
+    {
+      "id": 4,
+      "title": "Calidez",
+      "photo": "",
+      "description": "Nos esforzamos por crear un ambiente acogedor donde cada cliente se sienta como en casa desde el primer sorbo."
+    },
+    {
+      "id": 5,
+      "title": "Calidad",
+      "photo": "",
+      "description": "Seleccionamos cuidadosamente nuestros granos y cuidamos cada detalle del proceso para ofrecer una experiencia de café excepcional."
+    },
+    {
+      "id": 6,
+      "title": "Creatividad",
+      "photo": "",
+      "description": "Innovamos constantemente en nuestras recetas, presentaciones y espacios para sorprender y deleitar a nuestros visitantes."
+    },
+    {
+      "id": 7,
+      "title": "Comunidad",
+      "photo": "",
+      "description": "Fomentamos relaciones genuinas con nuestros clientes, colaboradores y proveedores, construyendo juntos un espacio de encuentro y conexión."
+    }
+  ]
+}
