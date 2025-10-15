@@ -1,0 +1,42 @@
+[
+  {
+    "id": "c001",
+    "nombre": "Espresso Doble",
+    "descripcion": "Concentrado intenso y aromático, la base de todos nuestros cafés.",
+    "precio": 3.00,
+    "origen": "Etiopía Yirgacheffe",
+    "tostado": "Medio-Oscuro"
+  },
+  {
+    "id": "c002",
+    "nombre": "Latte Vainilla",
+    "descripcion": "Shot de espresso, leche al vapor y un toque de sirope de vainilla.",
+    "precio": 4.50,
+    "origen": "Colombia Supremo",
+    "tostado": "Medio"
+  },
+  {
+    "id": "c003",
+    "nombre": "Cappuccino Clásico",
+    "descripcion": "Espresso con leche espumada y una capa de microespuma, espolvoreado con cacao.",
+    "precio": 4.25,
+    "origen": "Brasil Cerrado",
+    "tostado": "Medio"
+  },
+  {
+    "id": "c004",
+    "nombre": "Cold Brew",
+    "descripcion": "Café infusionado en frío durante 18 horas para un sabor suave y baja acidez.",
+    "precio": 5.00,
+    "origen": "Guatemala Antigua",
+    "tostado": "Claro"
+  },
+  {
+    "id": "c005",
+    "nombre": "Mocaccino",
+    "descripcion": "Espresso, leche, sirope de chocolate y crema batida.",
+    "precio": 5.50,
+    "origen": "Colombia Supremo",
+    "tostado": "Medio"
+  }
+]
