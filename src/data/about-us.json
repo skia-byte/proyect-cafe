@@ -20,6 +20,13 @@
       "role": "Coordinadora de Contenido y Comunidad",
       "description": "Noemi crea y gestiona el contenido que conecta con nuestra comunidad cafetera: desde publicaciones en redes sociales hasta campañas que celebran el café y sus historias.",
       "photo": "/src/img/noemi-alca.png"
+    },
+    {
+      "id": 4,
+      "name": "Mariana Briceño",
+      "role": "Gestora de Experiencias y Eventos",
+      "description": "Mariana diseña y coordina actividades especiales que fortalecen el vínculo con nuestros clientes: desde catas temáticas hasta talleres creativos que celebran el mundo del café.",
+      "photo": "/src/img/mariana-briceno.png"
     }
   ],
   "company": [
@@ -29,25 +36,25 @@
   ],
   "values": [
     {
-      "id": 4,
+      "id": 5,
       "title": "Calidez",
       "photo": "/src/img/calidez.png",
       "description": "Nos esforzamos por crear un ambiente acogedor donde cada cliente se sienta como en casa desde el primer sorbo."
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Calidad",
       "photo": "/src/img/calidad.png",
       "description": "Seleccionamos cuidadosamente nuestros granos y cuidamos cada detalle del proceso para ofrecer una experiencia de café excepcional."
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Creatividad",
       "photo": "/src/img/creatividad.png",
       "description": "Innovamos constantemente en nuestras recetas, presentaciones y espacios para sorprender y deleitar a nuestros visitantes."
     },
     {
-      "id": 7,
+      "id": 8,
       "title": "Comunidad",
       "photo": "/src/img/comunidad.png",
       "description": "Fomentamos relaciones genuinas con nuestros clientes, colaboradores y proveedores, construyendo juntos un espacio de encuentro y conexión."
