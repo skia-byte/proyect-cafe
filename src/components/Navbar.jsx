@@ -1,5 +1,5 @@
 import logo from "../img/logonav.png";
-export default function Navbar() {
+function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#fdf2idd] shadow-md">
       <div className="container mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
@@ -16,3 +16,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+export default Navbar;
