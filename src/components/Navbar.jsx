@@ -1,13 +1,13 @@
 import logo from "../img/logonav.png";
 function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#fdf2idd] shadow-md">
+    <nav className="fixed top-0 left-0 w-full bg-[#fdf2dd] shadow-md z-50">
       <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <img
             src={logo}
             alt="Logo Café Aroma"
-            className="h-8 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
         </div>
         <ul className="flex space-x-10 text-shadow-amber-900">
