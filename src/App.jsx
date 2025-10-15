@@ -6,10 +6,12 @@ import ComplaintsBook from "./pages/ComplaintsBook";
 import Menu from "./pages/Menu";
 import MissionAndVision from "./pages/MissionAndVision";
 import ContactUs from "./pages/ContactUs";
+import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
