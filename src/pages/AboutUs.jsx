@@ -7,11 +7,11 @@ function AboutUs() {
   return (
     <div className="bg-stone-50 text-stone-900">
       {/* Banner */}
-      <section className="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-200 h-64 flex items-center justify-center text-center px-4">
+      <section className="bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400 h-64 flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl">
           <div className="mb-4">
             <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
-              Descubre quiénes somos en Café Aroma
+              Descubre quiénes somos
             </h1>
           </div>
           <div>
@@ -26,15 +26,13 @@ function AboutUs() {
       </section>
 
       {/* Nuestra historia */}
-      <section className="px-4 py-12">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
+      <section className="px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-8">
           <div className="md:w-1/2">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-900">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-900 mb-4">
               Nuestra historia: una taza, un sueño
             </h2>
-          </div>
-          <div>
-            <p className="text-base md:text-lg lg:text-xl leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl leading-relaxed text-justify">
               Fundamos Café Aroma en el año 2025, en Lima, Perú, con la ilusión
               de crear un lugar donde el café se viva con emoción. Lo que
               comenzó como una idea entre amigas se convirtió en un rincón lleno
@@ -57,7 +55,7 @@ function AboutUs() {
       </section>
 
       {/* Fundadoras */}
-      <section className="px-4 py-12">
+      <section className="bg-amber-50 px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-6">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-900">
@@ -71,7 +69,7 @@ function AboutUs() {
               hay una historia que nos une.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member) => (
               <article
                 key={member.id}
@@ -102,7 +100,7 @@ function AboutUs() {
       </section>
 
       {/* Valores */}
-      <section className="bg-amber-100 px-4 py-12">
+      <section className="bg-amber-100 px-4 sm:px-6 lg:px-8 py-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-6">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-900">
@@ -125,7 +123,7 @@ function AboutUs() {
                   <img
                     src={value.photo}
                     alt={`Foto de la ${value.title} en Café Aroma`}
-                    className="w-20 h-20 mx-auto object-contain"
+                    className="w-50 h-32 mx-auto rounded-xl object-cover"
                   />
                 </div>
                 <div>
