@@ -2,15 +2,27 @@ import logo from "../img/logonav.png";
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#fdf2idd] shadow-md">
-      <div className="container mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <img src={logo} alt="Logo" classnmae="h-8" />
-        <ul className="flex space-x-4 text-brown-800">
-          <li>Inicio</li>
-          <li>Sobre nosotras</li>
-          <li>Menú</li>
-          <li>Contactanos</li>
-          <li>Libro de reclamaciones</li>
-          <li>Misión y Visión</li>
+      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center">
+          <img
+            src={logo}
+            alt="Logo Café Aroma"
+            className="h-8 w-auto object-contain"
+          />
+        </div>
+        <ul className="flex space-x-10 text-shadow-amber-900">
+          <li className="hover:text-[#9c7042] cursor-pointer">Inicio</li>
+          <li className="hover:text-[#9c7042] cursor-pointer">
+            Sobre nosotras
+          </li>
+          <li className="hover:text-[#9c7042] cursor-pointer">Menú</li>
+          <li className="hover:text-[#9c7042] cursor-pointer">Contactanos</li>
+          <li className="hover:text-[#9c7042] cursor-pointer">
+            Libro de reclamaciones
+          </li>
+          <li className="hover:text-[#9c7042] cursor-pointer">
+            Misión y Visión
+          </li>
         </ul>
       </div>
     </nav>
