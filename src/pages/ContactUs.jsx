@@ -24,7 +24,7 @@ const ContactUs = () => {
       {/* Información + Formulario */}
       <section className="px-4 sm:px-6 lg:px-8 py-10">
         {/* Izquierda: contacto y redes */}
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-8">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-8">
           <section className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md space-y-6 w-full transform transition-transform duration-300 hover:-translate-y-2 md:w-1/2">
             {/* Información de contacto */}
             <div>
@@ -126,7 +126,7 @@ const ContactUs = () => {
           </section>
 
           {/* Derecha: formulario */}
-          <section className="md:w-1/2">
+          <section className="w-full md:w-1/2">
             <div className="transform transition-transform duration-300 hover:-translate-y-2">
               <Form />
             </div>
