@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-[#4a2e1e] text-[#e4d3ba] py-8 mt-16">
+    <footer className="bg-[#4a2e1e] text-[#e4d3ba] py-8">
       <div className="max-w-6cl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         <h2 className="text-2xl font-bold">Café Aroma</h2>
 
