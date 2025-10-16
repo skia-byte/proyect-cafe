@@ -50,7 +50,7 @@ function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-amber-50 p-4 md:p-6 lg:p-8 rounded-lg shadow-md space-y-6 w-full"
+      className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md space-y-6 w-full"
     >
       <div>
         <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-amber-900">
@@ -159,7 +159,7 @@ function Form() {
       </button>
 
       {success && (
-        <div className="mt-4 bg-green-100 text-green-700 p-3 rounded text-sm md:text-base lg:text-lg">
+        <div className="mt-4 text-green-700 p-3 text-sm md:text-base lg:text-lg">
           <p className="">¡Mensaje enviado con éxito!</p>
         </div>
       )}
