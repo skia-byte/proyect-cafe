@@ -149,7 +149,11 @@ function ContactUs() {
       </section>
     </div>
   );
+<<<<<<< HEAD
 >>>>>>> ebed073d23a2834b54730e791a04eef7f78fad52
+=======
+>>>>>>> a1377201956ee5c01601e2804d6092dbd39e1990
+>>>>>>> layout
 }
 
 export default ContactUs;

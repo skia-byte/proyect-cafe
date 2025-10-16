@@ -1,4 +1,6 @@
 import logo from "../img/logonav.png";
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#fdf2dd] shadow-md z-50">
@@ -11,17 +13,50 @@ function Navbar() {
           />
         </div>
         <ul className="flex space-x-10 text-shadow-amber-900">
-          <li className="hover:text-[#9c7042] cursor-pointer">Inicio</li>
-          <li className="hover:text-[#9c7042] cursor-pointer">
-            Sobre nosotras
+          <li>
+            {" "}
+            <Link to="/" className="hover:text-[#9c7042] cursor-pointer">
+              Inicio
+            </Link>
           </li>
-          <li className="hover:text-[#9c7042] cursor-pointer">Menú</li>
-          <li className="hover:text-[#9c7042] cursor-pointer">Contactanos</li>
-          <li className="hover:text-[#9c7042] cursor-pointer">
-            Libro de reclamaciones
+          <li>
+            {" "}
+            <Link
+              to="/about-us"
+              className="hover:text-[#9c7042] cursor-pointer"
+            >
+              Sobre nosotras
+            </Link>
           </li>
-          <li className="hover:text-[#9c7042] cursor-pointer">
-            Misión y Visión
+          <li>
+            <Link to="/menu" className="hover:text-[#9c7042] cursor-pointer">
+              Menú
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/contact-us"
+              className="hover:text-[#9c7042] cursor-pointer"
+            >
+              Contactanos
+            </Link>
+          </li>
+          <li>
+            {" "}
+            <Link
+              to="/complaints"
+              className="hover:text-[#9c7042] cursor-pointer"
+            >
+              Libro de reclamaciones
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/mission-vision"
+              className="hover:text-[#9c7042] cursor-pointer"
+            >
+              Misión y Visión
+            </Link>
           </li>
         </ul>
       </div>
