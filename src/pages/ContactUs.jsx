@@ -157,6 +157,10 @@ const ContactUs = () => {
       </section>
     </div>
   );
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> 3879277 (Arreglo conflicto)
 
 export default ContactUs;
