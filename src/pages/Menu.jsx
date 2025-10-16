@@ -1,6 +1,6 @@
 import React from "react";
 
-// Datos de los cafés (Simulando la carga del archivo mis_cafes.json)
+// Datos de los cafés (Simulando la carga del archivo mis_cafes.json/ menu.json)
 const coffeeItems = [
   {
     id: "c001",
