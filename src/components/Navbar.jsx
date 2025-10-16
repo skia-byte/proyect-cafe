@@ -67,7 +67,7 @@ function Navbar() {
                   to={item.href}
                   className={`font-semibold transition-colors duration-200 ${
                     isActive(item.href)
-                      ? "text-[#9c7042]"
+                      ? "text-[#4a2e1e]"
                       : "text-[#704c2b] hover:text-[#9c7042]"
                   }`}
                 >
