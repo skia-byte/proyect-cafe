@@ -20,6 +20,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
+          <Route path="/components/Navbar" element={<Navbar />} />
         </Routes>
       </BrowserRouter>
     </>
