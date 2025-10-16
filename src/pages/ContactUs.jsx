@@ -1,3 +1,6 @@
+function ContactUs() {
+  return <h1>Contactanos</h1>;
+=======
 import React from "react";
 import Form from "../components/Form";
 
@@ -157,6 +160,5 @@ const ContactUs = () => {
       </section>
     </div>
   );
-};
 
 export default ContactUs;

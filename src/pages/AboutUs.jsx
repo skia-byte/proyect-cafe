@@ -1,7 +1,7 @@
 import React from "react";
 import aboutUsData from "../data/about-us.json";
 
-function AboutUs() {
+const AboutUs = () => {
   const { team, company, values } = aboutUsData;
 
   return (
@@ -141,6 +141,6 @@ function AboutUs() {
       </section>
     </div>
   );
-}
+};
 
 export default AboutUs;
