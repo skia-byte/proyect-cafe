@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 
 // Datos de los cafés (Simulando la carga del archivo mis_cafes.json)
@@ -117,3 +118,10 @@ const CoffeeMenuPage = () => {
 };
 
 export default CoffeeMenuPage;
+=======
+function Menu() {
+  return <h1>Menu</h1>;
+}
+
+export default Menu;
+>>>>>>> ffc75093b8d00e9d9a6392ef8d0365755062739c
