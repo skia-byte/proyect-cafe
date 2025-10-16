@@ -10,7 +10,7 @@ function NotFound() {
       </p>
       <Link
         to="/"
-        className="px-6 py-3 bg-amber-700 text-white rounded-lg hover:bg-amber-700 transition"
+        className="px-6 py-3 bg-amber-700 text-white rounded-lg hover:bg-amber-900 transition"
       >
         Volver al inicio
       </Link>

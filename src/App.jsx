@@ -6,6 +6,7 @@ import ComplaintsBook from "./pages/ComplaintsBook";
 import Menu from "./pages/Menu";
 import MissionAndVision from "./pages/MissionAndVision";
 import ContactUs from "./pages/ContactUs";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/mission-vision" element={<MissionAndVision />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </BrowserRouter>
