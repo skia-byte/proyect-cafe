@@ -88,7 +88,7 @@ function Navbar() {
                     onClick={() => setIsMenuOpen(false)}
                     className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                       isActive(item.href)
-                        ? "text-[#9c7042] bg-[#f8e9c7]"
+                        ? "text-[#4a2e1e] bg-[#f8e9c7]"
                         : "text-[#704c2b] hover:text-[#A59385] hover:bg-[#f8e9c7]"
                     }`}
                   >
