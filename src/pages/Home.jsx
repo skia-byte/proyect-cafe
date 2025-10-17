@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -45,12 +46,12 @@ function Home() {
               ¡Visítanos y compruébalo!
             </p>
 
-            <a
-              href="/pages/Menu.jsx"
+            <Link
+              to="/menu"
               className="inline-block px-8 py-3 bg-[#9c7042] text-white font-bold rounded-full transition duration-300 hover:bg-[#7b5a34] shadow-md"
             >
               Explora Nuestro Menú ☕
-            </a>
+            </Link>
           </div>
         </div>
       </section>

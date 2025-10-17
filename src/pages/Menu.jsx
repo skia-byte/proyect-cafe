@@ -1,6 +1,5 @@
 import React from "react";
 
-// Datos de los cafés (Simulando la carga del archivo mis_cafes.json/ menu.json)
 const coffeeItems = [
   {
     id: "c001",
@@ -42,10 +41,6 @@ const coffeeItems = [
   },
 ];
 
-/**
- * Componente que representa un solo elemento del menú de café.
- * Utiliza clases de Tailwind para el estilo.
- */
 const CoffeeMenuItem = ({ nombre, descripcion, precio, origen }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
@@ -69,9 +64,6 @@ const CoffeeMenuItem = ({ nombre, descripcion, precio, origen }) => {
   );
 };
 
-/**
- * Componente principal de la página de menú de café.
- */
 const CoffeeMenuPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
@@ -93,7 +85,6 @@ const CoffeeMenuPage = () => {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Mapea los datos del array para renderizar los elementos */}
           {coffeeItems.map((item) => (
             <CoffeeMenuItem
               key={item.id}
