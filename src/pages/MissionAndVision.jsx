@@ -1,12 +1,12 @@
 import React from "react";
-
+import cafeteria from '../img/cafeteria.png';
 
 const MissionAndVision = () => {
   return (
     <div className="min-h-screen bg-amber-50 py-8 px-4">
       <div className="max-w-4xl mx-auto bg-amber-100 rounded-lg shadow-md overflow-hidden mb-8">
         <img 
-          src={coffeeShop.photo}
+          src={cafeteria}
           alt="cafeteria"
           className="w-full h-64 object-cover"
         />
