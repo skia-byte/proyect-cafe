@@ -1,16 +1,32 @@
-# React + Vite
+# ☕ Proyecto: Café Aroma
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido a la página web oficial de **Café Aroma**! 🌟
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Características Principales
 
-## React Compiler
+* **Diseño Moderno y Atractivo:** Una interfaz visualmente agradable que refleja la calidez y el estilo de nuestra cafetería.
+* **Menú Detallado:** Explora nuestro completo menú de bebidas, comidas y postres, con descripciones e ingredientes.
+* **Ubicación y Horarios:** Encuentra fácilmente dónde estamos y cuándo abrir las puertas para servirte.
+* **Galería de Fotos:** Disfruta de imágenes de nuestros espacios, bebidas y la atmósfera única de Café Aroma.
+* **Información de Contacto:** Ponte en contacto con nosotros para consultas, eventos o pedidos especiales.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+¡Agradecemos cualquier sugerencia o mejora!
+
+---
+
+## 📧 Contacto
+
+¿Tienes alguna pregunta, comentario o sugerencia?
+
+* **Email:** contacto@cafearoma.com
+* **Teléfono:** (+51) 987 654 321
+* **Visítanos:** Calle Principal 123, Lima
+
+---
+
+## Derechos reservados
