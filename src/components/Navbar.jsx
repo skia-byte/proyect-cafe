@@ -1,8 +1,9 @@
 import { useState } from "react";
 import logo from "../img/logonav.png";
 import { Link, useLocation } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext";
 function Navbar() {
+  const { user, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -15,8 +16,26 @@ function Navbar() {
     { name: "Contáctanos", href: "/contact-us" },
     { name: "Libro de reclamaciones", href: "/complaints" },
     { name: "Misión y Visión", href: "/mission-vision" },
+    {
+      name: "Dashboard",
+      href: "/dashboard",
+      requiresAuth: true,
+      requiresAdmin: true,
+    },
+    {
+      name: "Iniciar Sesión",
+      href: "/LoginForm",
+      requiresAuth: false,
+    },
   ];
-
+  const filteredNavigation = navigation.filter((item) => {
+    // Si el nombre es 'Dashboard', solo lo devuelve si es Admin.
+    if (item.name === "Dashboard") {
+      return true;
+    }
+    // Para todos los demás enlaces ('Inicio', 'Menu', etc.), los devuelve siempre.
+    return true;
+  });
   return (
     <header>
       <nav className="fixed top-0 left-0 w-full bg-[#fdf2dd] shadow-md z-50">
@@ -61,7 +80,7 @@ function Navbar() {
 
           {/* Navegación escritorio */}
           <ul className="hidden md:flex space-x-10">
-            {navigation.map((item) => (
+            {filteredNavigation.map((item) => (
               <li key={item.name}>
                 <Link
                   to={item.href}

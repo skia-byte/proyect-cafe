@@ -1,11 +1,11 @@
 import React from "react";
-import cafeteria from '../img/cafeteria.png';
+import cafeteria from "../img/cafeteria.jpg";
 
 const MissionAndVision = () => {
   return (
     <div className="min-h-screen bg-amber-50 py-8 px-4">
       <div className="max-w-4xl mx-auto bg-amber-100 rounded-lg shadow-md overflow-hidden mb-8">
-        <img 
+        <img
           src={cafeteria}
           alt="cafeteria"
           className="w-full h-64 object-cover"
@@ -20,9 +20,9 @@ const MissionAndVision = () => {
               Misión
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Ofrecer una experiencia única en cada taza de café, combinando calidad, 
-              sabor y un ambiente acogedor que invite a la conversación, la creatividad 
-              y el disfrute.
+              Ofrecer una experiencia única en cada taza de café, combinando
+              calidad, sabor y un ambiente acogedor que invite a la
+              conversación, la creatividad y el disfrute.
             </p>
           </div>
 
@@ -32,9 +32,10 @@ const MissionAndVision = () => {
               Visión
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Ser la cafetería referente en la ciudad por la excelencia de nuestros 
-              productos, el compromiso con la sostenibilidad y la capacidad de crear 
-              un espacio donde las personas se sientan como en casa.
+              Ser la cafetería referente en la ciudad por la excelencia de
+              nuestros productos, el compromiso con la sostenibilidad y la
+              capacidad de crear un espacio donde las personas se sientan como
+              en casa.
             </p>
           </div>
         </div>
