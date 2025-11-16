@@ -10,21 +10,21 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 
-//Autenticación con Google
-
+// Autenticación con Google y Email
 const AuthContext = createContext();
 
+// Lista de correos que tienen el rol de admin
 const ADMIN_EMAIL = ["fablazaromogollon@crackthecode.la"];
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Registro con email y contraseña
   const register = async (email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Login con email y contraseña
   const loginWithEmail = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -50,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Detectar cambios de sesión
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
@@ -58,20 +60,26 @@ export const AuthProvider = ({ children }) => {
     return () => unsub();
   }, []);
 
-  // FUNCIÓN DE LOGIN CON GOOGLE
+  // Login con Google
   const loginWithGoogle = async () => {
-    await signInWithPopup(auth, googleProvider);
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error("Error al iniciar sesión con Google:", error.message);
+      throw error;
+    }
   };
 
+  // Logout
   const logout = async () => {
     console.log("Cerrando sesión...");
     await signOut(auth);
   };
 
+  // Validación de rol admin
   const isAdmin = useMemo(() => {
     return user && ADMIN_EMAIL.includes(user.email);
-  }, [user, ADMIN_EMAIL]);
-  // PRUEBA DE ROL ADMIN
+  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -85,7 +93,7 @@ export const AuthProvider = ({ children }) => {
         loading,
       }}
     >
-      {!loading && children}
+      {loading ? <p>Cargando...</p> : children}
     </AuthContext.Provider>
   );
 };
@@ -93,3 +101,5 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+
+export default AuthContext;
