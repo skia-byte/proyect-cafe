@@ -48,7 +48,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-container mx-auto mt-20 p-6 max-w-md bg-white rounded shadow">
       <h3>Iniciar Sesión (Administrador)</h3>
       <form onSubmit={handleSubmit}>
         {error && <p className="error-message">{error}</p>}
@@ -59,6 +59,7 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="m-3"
         />
         <input
           type="password"
@@ -66,9 +67,15 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="m-3"
         />
 
-        <button type="submit">Iniciar Sesión</button>
+        <button
+          type="submit"
+          className="flex m-3 bg-[#8b5e3c] hover:bg-[#6d482e] text-white font-bold py-2 px-4 rounded"
+        >
+          Iniciar Sesión
+        </button>
       </form>
     </div>
   );
