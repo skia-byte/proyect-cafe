@@ -12,6 +12,8 @@ import MissionAndVision from "./pages/MissionAndVision";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 import LoginForm from "./pages/LoginForm";
+import Products from "./pages/Products";
+import MyProfile from "./pages/MyProfile";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/LoginForm" element={<LoginForm />} />
+            <Route path="/dashboard/products" element={<Products />} />
+            <Route path="/myprofile" element={<MyProfile />} />
           </Routes>
         </Layout>
       </Router>

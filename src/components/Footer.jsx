@@ -9,7 +9,7 @@ function Footer() {
           <p className="text-sm">+51 987 654 321</p>
         </div>
 
-        <div classname="border-t border-[#7d5940] mt-6 pt-4 text-center text-[#e4d3ba]">
+        <div className="border-t border-[#7d5940] mt-6 pt-4 text-center text-[#e4d3ba]">
           <p className="text-sm">
             © 2024 Café Aroma. Todos los derechos reservados.
           </p>

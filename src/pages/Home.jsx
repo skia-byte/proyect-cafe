@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
-      <Navbar />
       <div className="pt-20 text-center bg-gradient-to-r from-amber-800 via-amber-600 to-amber-400 p-6">
         <h1 className="text-5xl font-bold text-[#fbf6f2] ">
           Bienvenido a Café Aroma
@@ -25,8 +24,6 @@ function Home() {
                 backgroundImage:
                   "url('https://cafelab.pe/wp-content/uploads/2024/05/OrigenTostadores_cafelab.pe_-1536x1024.jpg')",
               }}
-              img
-              alt="Café Aroma"
             >
               <img
                 src="https://gourmet.expob2b.es/uploads/fotos_noticias/2015/11/w800px_11239-90379.jpg"
