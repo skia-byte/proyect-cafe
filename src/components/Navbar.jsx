@@ -17,12 +17,6 @@ function Navbar() {
     { name: "Libro de reclamaciones", href: "/complaints" },
     { name: "Misión y Visión", href: "/mission-vision" },
     {
-      name: "Vista de Admin",
-      href: "/dashboard",
-      requiresAuth: true,
-      requiresAdmin: true,
-    },
-    {
       name: "Iniciar Sesión",
       href: "/LoginForm",
       requiresAuth: false,

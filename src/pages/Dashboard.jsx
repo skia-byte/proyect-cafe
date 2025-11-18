@@ -34,6 +34,27 @@ function Dashboard() {
               Gestión de productos
             </Link>
           </li>
+
+          <li>
+            <Link to="/dashboard/team" 
+            className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+            >
+              Gestión del equipo
+
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/dashboard/skills"
+            className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+            >
+              Gestion de habilidades
+            </Link>
+          </li>
+
+          
+
+
         </ul>
       </div>
 

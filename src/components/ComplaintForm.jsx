@@ -12,54 +12,77 @@ const ComplaintForm = () => {
     accion: ''
   });
 
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+
+    errors[e.target.name]
+      ? setErrors({ ...errors, [e.target.name]: '' })
+      : null;
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    !formData.nombre.trim()
+      ? newErrors.nombre = "El nombre es obligatorio"
+      : formData.nombre.length < 3
+        ? newErrors.nombre = "El nombre debe tener al menos 3 caracteres"
+        : null;
+
+    !formData.dni
+      ? newErrors.dni = "El DNI es obligatorio"
+      : !/^\d{8}$/.test(formData.dni)
+        ? newErrors.dni = "El DNI debe tener 8 números"
+        : null;
+
+    !formData.telefono
+      ? newErrors.telefono = "El teléfono es obligatorio"
+      : !/^\d{9}$/.test(formData.telefono)
+        ? newErrors.telefono = "El teléfono debe tener 9 números"
+        : null;
+
+    !formData.correo
+      ? newErrors.correo = "El correo es obligatorio"
+      : !formData.correo.includes('@')
+        ? newErrors.correo = "Correo no válido"
+        : null;
+
+    !formData.tipo ? newErrors.tipo = "Selecciona un tipo" : null;
+    return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!/^\d{8}$/.test(formData.dni)) {
-      alert("El DNI debe tener 8 números");
-      return;
-    }
-
-    if (!/^\d{9}$/.test(formData.telefono)) {
-      alert("El teléfono debe tener 9 números");
-      return;
-    }
-
-    if (formData.nombre.length < 3) {
-      alert("El nombre es muy corto");
-      return;
-    }
-
-    if (!formData.correo.includes('@')) {
-      alert("Correo no válido");
-      return;
-    }
-
-    if (!formData.tipo) {
-      alert("Selecciona un tipo");
-      return;
-    }
-
-    alert("¡Reclamo enviado! ✅");
-    
-    setFormData({
-      nombre: '', dni: '', telefono: '', correo: '',
-      tipo: '', descripcion: '', pedido: '', accion: ''
-    });
+    const validationErrors = validateForm();
+    Object.keys(validationErrors).length > 0
+      ? (setErrors(validationErrors), setSuccess(false))
+      : (setErrors({}),
+        setSuccess(true),
+        setTimeout(() => {
+          setFormData({
+            nombre: '', dni: '', telefono: '', correo: '',
+            tipo: '', descripcion: '', pedido: '', accion: ''
+          });
+          setSuccess(false);
+        }, 3000));
   };
 
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
       <form onSubmit={handleSubmit} className="space-y-8">
-        
-        {/* Datos del consumidor */}
+
+        {success ? (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-center">
+            ¡Reclamo enviado correctamente! ✅
+          </div>
+        ) : null}
+
         <fieldset className="border-2 border-[#d7b89c] rounded-xl p-6">
           <legend className="text-2xl font-bold text-[#a7754f] px-4 font-serif border-b-2 border-[#44250a]">
             Datos del consumidor
@@ -73,9 +96,12 @@ const ComplaintForm = () => {
                 name="nombre"
                 value={formData.nombre}
                 onChange={handleChange}
-                className="w-full p-4 border border-[#cdb8a6] rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all"
+                className={`w-full p-4 border rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all ${errors.nombre ? "border-red-500 bg-red-50" : "border-[#cdb8a6]"}`}
                 required
               />
+              {errors.nombre ? (
+                <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
+              ) : null}
             </div>
 
             <div>
@@ -86,9 +112,12 @@ const ComplaintForm = () => {
                 value={formData.dni}
                 onChange={handleChange}
                 maxLength="8"
-                className="w-full p-4 border border-[#cdb8a6] rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all"
+                className={`w-full p-4 border rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all ${errors.dni ? "border-red-500 bg-red-50" : "border-[#cdb8a6]"}`}
                 required
               />
+              {errors.dni ? (
+                <p className="text-red-500 text-sm mt-1">{errors.dni}</p>
+              ) : null}
             </div>
 
             <div>
@@ -99,9 +128,12 @@ const ComplaintForm = () => {
                 value={formData.telefono}
                 onChange={handleChange}
                 maxLength="9"
-                className="w-full p-4 border border-[#cdb8a6] rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all"
+                className={`w-full p-4 border rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all ${errors.telefono ? "border-red-500 bg-red-50" : "border-[#cdb8a6]"}`}
                 required
               />
+              {errors.telefono ? (
+                <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+              ) : null}
             </div>
 
             <div className="md:col-span-2">
@@ -111,14 +143,16 @@ const ComplaintForm = () => {
                 name="correo"
                 value={formData.correo}
                 onChange={handleChange}
-                className="w-full p-4 border border-[#cdb8a6] rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all"
+                className={`w-full p-4 border rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all ${errors.correo ? "border-red-500 bg-red-50" : "border-[#cdb8a6]"}`}
                 required
               />
+              {errors.correo ? (
+                <p className="text-red-500 text-sm mt-1">{errors.correo}</p>
+              ) : null}
             </div>
           </div>
         </fieldset>
 
-        {/* Detalle de la queja o reclamo */}
         <fieldset className="border-2 border-[#d7b89c] rounded-xl p-6">
           <legend className="text-2xl font-bold text-[#a7754f] px-4 font-serif border-b-2 border-[#44250a]">
             Detalle de la queja o reclamo
@@ -131,13 +165,16 @@ const ComplaintForm = () => {
                 name="tipo"
                 value={formData.tipo}
                 onChange={handleChange}
-                className="w-full p-4 border border-[#cdb8a6] rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all"
+                className={`w-full p-4 border rounded-lg focus:border-[#8b5e3c] focus:ring-3 focus:ring-[#8b5e3c] focus:ring-opacity-15 transition-all ${errors.tipo ? "border-red-500 bg-red-50" : "border-[#cdb8a6]"}`}
                 required
               >
                 <option value="">Seleccione</option>
                 <option value="queja">Queja</option>
                 <option value="reclamo">Reclamo</option>
               </select>
+              {errors.tipo ? (
+                <p className="text-red-500 text-sm mt-1">{errors.tipo}</p>
+              ) : null}
             </div>
 
             <div>
@@ -165,7 +202,6 @@ const ComplaintForm = () => {
           </div>
         </fieldset>
 
-        {/* Acción solicitada */}
         <fieldset className="border-2 border-[#d7b89c] rounded-xl p-6">
           <legend className="text-2xl font-bold text-[#a7754f] px-4 font-serif border-b-2 border-[#44250a]">
             Acción solicitada
@@ -184,7 +220,6 @@ const ComplaintForm = () => {
           </div>
         </fieldset>
 
-        {/* Botón de enviar */}
         <div className="text-center">
           <button
             type="submit"
@@ -193,6 +228,7 @@ const ComplaintForm = () => {
             Enviar reclamo
           </button>
         </div>
+
       </form>
     </div>
   );
