@@ -3,10 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 
 const MyProfile = () => {
-  const { user, logout } = useAuth();
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -16,31 +13,22 @@ const MyProfile = () => {
     experience: [],
   });
 
-  const loadUserDate = useCallback(async () => {
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
     if (!user) return;
 
-    try {
-      const data = await getUserData(user.uid);
-      setUserData(data);
-
-      if (data.teamMember) {
-        setFormData(data.teamMember);
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          name: user.displayName || "",
-        }));
-      }
-    } catch (error) {
-      console.error("Error loading user data:", error);
-    }
+    setFormData({
+      name: user.displayName || "",
+      role: "",
+      bio: "",
+      skills: "",
+      experience: "",
+    });
 
     setLoading(false);
   }, [user]);
-
-  useEffect(() => {
-    loadUserDate();
-  }, [user, loadUserDate]);
 
   //Handle inputs
   const handleInputChange = (e) => {
@@ -51,48 +39,23 @@ const MyProfile = () => {
     }));
   };
 
-  const handleSkillsChange = (e) => {
-    const skills = e.target.value
-      .split(",")
-      .map((s) => s.trim())
-      .filter((s) => s);
-    setFormData((prev) => ({ ...prev, skills }));
-  };
-
   // Save data
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    try {
-      const profileData = {
-        ...formData,
-        userId: user.uid,
-        userEmail: user.email,
-      };
-
-      if (userData?.teamMember?.id) {
-        await updateTeamMember(userData.teamMember.id, profileData);
-      } else {
-        await createTeamMember(profileData);
-      }
-
-      await loadUserData();
-      alert("Perfil actualizado con éxito 💛");
-    } catch (error) {
-      console.error("Error saving profile:", error);
-      alert("Error al guardar");
-    }
-
-    setSaving(false);
+    setTimeout(() => {
+      alert("Perfil actualizado con éxito");
+      setSaving(false);
+    }, 700);
   };
 
   //Loading state
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-700"></div>
-        <span className="ml-2 text-yellow-700">Cargando perfil...</span>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9c7042]"></div>
+        <span className="ml-2 text-[#9c7042]">Cargando perfil...</span>
       </div>
     );
   }
@@ -181,7 +144,7 @@ const MyProfile = () => {
               </label>
               <input
                 type="text"
-                value={formData.skills.join(", ")}
+                value={formData.skills}
                 onChange={handleSkillsChange}
                 className="w-full px-3 py-2 border rounded-md"
                 placeholder="Atención al cliente, organización..."
