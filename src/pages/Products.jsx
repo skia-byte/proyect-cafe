@@ -138,7 +138,7 @@ const Products = () => {
             <button
               disabled={saving}
               type="submit"
-              className="border-[#7d5940] hover:bg-[#4a2e1e]  text-white px-4 py-2 rounded"
+              className="bg-[#7d5940] border-[#7d5940] hover:bg-[#4a2e1e]  text-white px-4 py-2 rounded"
             >
               {saving ? "Guardando..." : "Agregar Producto"}
             </button>
