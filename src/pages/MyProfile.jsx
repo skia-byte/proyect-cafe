@@ -39,6 +39,13 @@ const MyProfile = () => {
     }));
   };
 
+  const handleSkillsChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: e.target.value,
+    }));
+  };
+
   // Save data
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,113 +88,101 @@ const MyProfile = () => {
             </h3>
             <p className="text-[#7d5940]">{user?.email}</p>
             <p className="text-sm text-[#4a2e1e]">
-              {userRole === "admin" ? "Administradora" : "Miembro del equipo"}
+              Miembro del equipo de Café Aroma
             </p>
           </div>
         </div>
       </div>
 
       {/* Profile form */}
-      {isTeam ? (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name and role */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
-                Nombre completo
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border rounded-md"
-                placeholder="Tu nombre completo"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
-                Rol
-              </label>
-              <input
-                type="text"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border rounded-md"
-                placeholder="Ej: Administradora, Encargada"
-              />
-            </div>
-          </div>
-
-          {/* Bio */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Name and role */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
-              Biografía
+              Nombre completo
             </label>
-            <textarea
-              name="bio"
-              rows="4"
-              value={formData.bio}
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border rounded-md"
-              placeholder="Cuéntanos sobre ti..."
+              placeholder="Tu nombre completo"
             />
           </div>
 
-          {/* Skills + experience */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
-                Habilidades
-              </label>
-              <input
-                type="text"
-                value={formData.skills}
-                onChange={handleSkillsChange}
-                className="w-full px-3 py-2 border rounded-md"
-                placeholder="Atención al cliente, organización..."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
-                Años de experiencia
-              </label>
-              <input
-                type="text"
-                name="experience"
-                value={formData.experience}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border rounded-md"
-                placeholder="Ej: 2 años"
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
+              Rol
+            </label>
+            <input
+              type="text"
+              name="role"
+              value={formData.role}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border rounded-md"
+              placeholder="Ej: Administradora, Encargada"
+            />
           </div>
-
-          {/* Submit */}
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              disabled={saving}
-              className="bg-[#7d5940] text-white px-6 py-2 rounded-md hover:bg-[#4a2e1e] disabled:opacity-60"
-            >
-              {" "}
-              {saving ? "Guardando..." : "Guardar cambios"}{" "}
-            </button>
-          </div>
-        </form>
-      ) : (
-        <div className="text-center py-10">
-          <h3 className="text-lg font-medium text-[#4a2e1e] mb-1">
-            Acceso limitado
-          </h3>
-          <p className="text-[#7d5940]">
-            Solo los miembros del equipo pueden editar su perfil
-          </p>
         </div>
-      )}
+
+        {/* Bio */}
+        <div>
+          <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
+            Biografía
+          </label>
+          <textarea
+            name="bio"
+            rows="4"
+            value={formData.bio}
+            onChange={handleInputChange}
+            className="w-full px-3 py-2 border rounded-md"
+            placeholder="Cuéntanos sobre ti..."
+          />
+        </div>
+
+        {/* Skills + experience */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
+              Habilidades
+            </label>
+            <input
+              type="text"
+              value={formData.skills}
+              onChange={handleSkillsChange}
+              className="w-full px-3 py-2 border rounded-md"
+              placeholder="Atención al cliente, organización..."
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1 text-[#4a2e1e]">
+              Años de experiencia
+            </label>
+            <input
+              type="text"
+              name="experience"
+              value={formData.experience}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border rounded-md"
+              placeholder="Ej: 2 años"
+            />
+          </div>
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            disabled={saving}
+            className="bg-[#7d5940] text-white px-6 py-2 rounded-md hover:bg-[#4a2e1e] disabled:opacity-60"
+          >
+            {saving ? "Guardando..." : "Guardar cambios"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
