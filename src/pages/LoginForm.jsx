@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // Ajusta esta ruta
+import { useAuth } from "../context/AuthContext";
 
 const LoginForm = () => {
   // 1. Obtener funciones y estados del contexto
-  const { user, loginWithEmail, isAdmin } = useAuth();
+  const { user, loginWithEmail, loginWithGoogle, isAdmin } = useAuth();
 
+  // 2. Estados locales para manejar inputs y mensajes
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate(); // Hook para redirecciones
 
-  // 2. Redirigir si ya está logueado y es administrador
+  // 3. Redirigir si ya está logueado y es administrador
   useEffect(() => {
     // Si el usuario existe y es admin, redirigir inmediatamente al dashboard
     if (user && isAdmin) {
@@ -19,14 +21,16 @@ const LoginForm = () => {
     }
   }, [user, isAdmin, navigate]);
 
-  // 3. Manejo del envío del formulario
+  // 4. Manejo del envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Limpiar errores anteriores
+    setError(""); // Limpia errores anteriores
+    setMessage(null); // Limpia mensajes anteriores
 
     try {
       await loginWithEmail(email, password);
       // El useEffect se encargará de la redirección
+      setMessage({ type: "success", text: "Sesión iniciada correctamente." });
     } catch (err) {
       // Manejo de errores de Firebase
       if (
@@ -42,9 +46,25 @@ const LoginForm = () => {
     }
   };
 
-  // Si ya es administrador, no muestres el formulario (esto lo hace el useEffect)
+  // 5. Manejo de login con Google
+  const handleGoogle = async () => {
+    setError(""); // Limpia errores anteriores
+    setMessage(null); // Limpia mensajes anteriores
+    try {
+      await loginWithGoogle(); // Llama a la función del contexto
+      setMessage({ type: "success", text: "Accediste con Google." });
+    } catch (err) {
+      setError("Error al iniciar sesión con Google.");
+    }
+  };
+
+  // 6. Si ya es administrador, no muestres el formulario (esto lo hace useEffect)
   if (user && isAdmin) {
-    return <div>Redirigiendo al Dashboard...</div>;
+    return (
+      <div className="text-center text-yellow-900">
+        Redirigiendo al Dashboard...
+      </div>
+    );
   }
 
   return (
