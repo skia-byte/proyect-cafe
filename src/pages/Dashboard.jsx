@@ -8,23 +8,28 @@ function Dashboard() {
   const { logout, user } = useAuth();
 
   return (
-    <div className="admin-dashboard">
-      <h2>Bienvenido, Administrador de Café Aroma</h2>
-      <p>Este es el panel central de gestión.</p>
+    <div className="admin-dashboard mt-24 px-4 flex justify-center">
+      <div className="bg-[#f2e7d9] shadow-xl rounded-xl p-8 w-full max-w-2xl">
+        <h2 className="text-3xl font bold text-center mb-2 text-[#4a2e1e]">
+          Bienvenido, Administrador de Café Aroma
+        </h2>
+        <p className="text-center text-[#9c7042] mb-8">
+          Este es el panel central de gestión.
+        </p>
 
-      {/* Menú del dashboard*/}
-      <div className="bg-white shadow rounded p-4 w-full max-w-md">
-        <h3 className="text-lg font-semibold mb-3">Navegación</h3>
+        {/* Menú del dashboard*/}
+        <div className="bg-white shadow rounded p-4 w-full max-w-md mx-auto">
+          <h3 className="text-xl font-semibold mb-3">Navegación</h3>
 
-        <ul className="space-y-2">
-          <li>
-            <Link
-              to="/myprofile"
-              className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Mi perfil
-            </Link>
-          </li>
+          <ul className="space-y-3">
+            <li>
+              <Link
+                to="/myprofile"
+                className="block px-4 py-3 bg-[#7d5940] text-white hover:bg-[#4a2e1e] rounded text-lg"
+              >
+                Mi perfil
+              </Link>
+            </li>
 
           <li>
             <Link
@@ -34,27 +39,6 @@ function Dashboard() {
               Gestión de productos
             </Link>
           </li>
-
-          <li>
-            <Link to="/dashboard/team" 
-            className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Gestión del equipo
-
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/dashboard/skills"
-            className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Gestion de habilidades
-            </Link>
-          </li>
-
-          
-
-
         </ul>
       </div>
 
