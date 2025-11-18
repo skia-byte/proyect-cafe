@@ -49,6 +49,7 @@ function Dashboard() {
         Cerrar Sesión
       </button>
     </div>
+  </div>
   );
 }
 
