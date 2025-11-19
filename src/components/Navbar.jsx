@@ -18,7 +18,7 @@ function Navbar() {
     { name: "Misión y Visión", href: "/mission-vision" },
     {
       name: "Iniciar Sesión",
-      href: "/LoginForm",
+      href: "/login-form",
       requiresAuth: false,
     },
   ];
