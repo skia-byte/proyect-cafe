@@ -24,7 +24,7 @@ function Dashboard() {
           <ul className="space-y-3">
             <li>
               <Link
-                to="/myprofile"
+                to="/dashboard/myprofile"
                 className="block px-4 py-3 bg-[#7d5940] text-white hover:bg-[#4a2e1e] rounded text-lg"
               >
                 Mi perfil
@@ -51,7 +51,7 @@ function Dashboard() {
 
             <li>
               <Link
-                to="/skills"
+                to="/dashboard/skills"
                 className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
               >
                 Gestión de Habilidades

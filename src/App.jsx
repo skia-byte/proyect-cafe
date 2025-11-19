@@ -16,6 +16,7 @@ import Products from "./pages/Products";
 import MyProfile from "./pages/MyProfile";
 import Skills from "./pages/Skills";
 import Team from "./pages/Team";
+
 function App() {
   return (
     <div>
@@ -32,8 +33,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/LoginForm" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
-            <Route path="/myprofile" element={<MyProfile />} />
-            <Route path="/skills" element={<Skills />} />
+            <Route path="/dashboard/myprofile" element={<MyProfile />} />
+            <Route path="/dashboard/skills" element={<Skills />} />
             <Route path="/dashboard/team" element={<Team />} />
           </Routes>
         </Layout>
