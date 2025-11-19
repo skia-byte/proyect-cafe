@@ -31,44 +31,43 @@ function Dashboard() {
               </Link>
             </li>
 
-          <li>
-            <Link
-              to="/dashboard/products"
-              className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Gestión de productos
-            </Link>
-          </li>
+            <li>
+              <Link
+                to="/dashboard/products"
+                className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+              >
+                Gestión de productos
+              </Link>
+            </li>
 
-          <li>
-            <Link
-            to="/dashboard/Team"
-            className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Gestión de Equipo
-            </Link>
-          </li>
+            <li>
+              <Link
+                to="/dashboard/Team"
+                className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+              >
+                Gestión de Equipo
+              </Link>
+            </li>
 
-          <li>
-            <Link
-              to="/dashboard/Skills"
-              className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
-            >
-              Gestión de Habilidades
-            </Link>
-          </li>
+            <li>
+              <Link
+                to="/dashboard/Skills"
+                className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+              >
+                Gestión de Habilidades
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-        </ul>
+        <button
+          onClick={logout}
+          className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Cerrar Sesión
+        </button>
       </div>
-
-      <button
-        onClick={logout}
-        className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-      >
-        Cerrar Sesión
-      </button>
     </div>
-  </div>
   );
 }
 
