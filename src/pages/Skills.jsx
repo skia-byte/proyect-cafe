@@ -78,24 +78,24 @@ function SkillsManager() {
         updatedAt: new Date(),
       };
 
-    if (!editingSkill) {
-      skillData.createdAt = new Date();
-    }
+      if (!editingSkill) {
+        skillData.createdAt = new Date();
+      }
 
-    if (editingSkill) {
-      const skillRef = doc(db, "skills", editingSkill.id);
-      await updateDoc(skillRef, skillData);
-    } else {
-      await addDoc(collection(db, "skills"), skillData);
-    }
+      if (editingSkill) {
+        const skillRef = doc(db, "skills", editingSkill.id);
+        await updateDoc(skillRef, skillData);
+      } else {
+        await addDoc(collection(db, "skills"), skillData);
+      }
 
-    resetForm();
-  } catch (error) {
-    console.error("Error al guardar:", error);
-    alert("Error al guardar la habilidad");
-    setLoading(false);
-  }
-};
+      resetForm();
+    } catch (error) {
+      console.error("Error al guardar:", error);
+      alert("Error al guardar la habilidad");
+      setLoading(false);
+    }
+  };
 
   // edición
   const handleEdit = (skill) => {
@@ -176,7 +176,7 @@ function SkillsManager() {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-amber-600 text-white px-4 py-2 rounded-md font-medium hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+          className="bg-amber-600 text-white px-4 py-2 rounded-md font-medium hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 cursor-pointer"
         >
           + Agregar Habilidad
         </button>
@@ -282,13 +282,13 @@ function SkillsManager() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="bg-amber-600 text-white px-6 py-2 rounded-md font-medium hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+                className="bg-amber-600 text-white px-6 py-2 rounded-md font-medium hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 cursor-pointer"
               >
                 {editingSkill ? "Actualizar" : "Agregar"} Habilidad
               </button>
@@ -348,13 +348,13 @@ function SkillsManager() {
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleEdit(skill)}
-                  className="text-amber-600 hover:text-amber-700 text-sm font-medium"
+                  className="text-amber-600 hover:text-amber-700 text-sm font-medium cursor-pointer"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleDelete(skill.id)}
-                  className="text-red-600 hover:text-red-700 text-sm font-medium"
+                  className="text-red-600 hover:text-red-700 text-sm font-medium cursor-pointer"
                 >
                   Eliminar
                 </button>
@@ -376,7 +376,7 @@ function SkillsManager() {
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-amber-600 text-white px-4 py-2 rounded-md font-medium hover:bg-amber-700"
+            className="bg-amber-600 text-white px-4 py-2 rounded-md font-medium hover:bg-amber-700 cursor-pointer"
           >
             Agregar Primera Habilidad
           </button>

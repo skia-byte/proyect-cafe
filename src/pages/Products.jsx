@@ -138,7 +138,7 @@ const Products = () => {
             <button
               disabled={saving}
               type="submit"
-              className="bg-[#7d5940] border-[#7d5940] hover:bg-[#4a2e1e]  text-white px-4 py-2 rounded"
+              className="bg-[#7d5940] border-[#7d5940] hover:bg-[#4a2e1e]  text-white px-4 py-2 rounded cursor-pointer"
             >
               {saving ? "Guardando..." : "Agregar Producto"}
             </button>
@@ -148,7 +148,7 @@ const Products = () => {
               onClick={() =>
                 setForm({ name: "", price: "", description: "", origin: "" })
               }
-              className="border rounded px-4 py-2"
+              className="border rounded px-4 py-2 cursor-pointer"
             >
               Limpiar
             </button>
@@ -186,7 +186,7 @@ const Products = () => {
 
                 <button
                   onClick={() => handleDelete(p.id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded cursor-pointer"
                 >
                   Eliminar
                 </button>

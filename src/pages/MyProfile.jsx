@@ -177,7 +177,7 @@ const MyProfile = () => {
           <button
             type="submit"
             disabled={saving}
-            className="bg-[#7d5940] text-white px-6 py-2 rounded-md hover:bg-[#4a2e1e] disabled:opacity-60"
+            className="bg-[#7d5940] text-white px-6 py-2 rounded-md hover:bg-[#4a2e1e] disabled:opacity-60 cursor-pointer"
           >
             {saving ? "Guardando..." : "Guardar cambios"}
           </button>
