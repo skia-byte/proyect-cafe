@@ -42,7 +42,7 @@ function Dashboard() {
 
             <li>
               <Link
-                to="/dashboard/Team"
+                to="/dashboard/team"
                 className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
               >
                 Gestión de Equipo
@@ -51,7 +51,7 @@ function Dashboard() {
 
             <li>
               <Link
-                to="/dashboard/Skills"
+                to="/skills"
                 className="block px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded"
               >
                 Gestión de Habilidades

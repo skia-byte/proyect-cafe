@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
-import { db } from "../FireBase";
+import { db } from "../FireBase/firebase";
 import {
-  collection,addDoc,updateDoc,deleteDoc,doc,onSnapshot,query,orderBy
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext"; // contexto de auth
 
@@ -57,7 +64,7 @@ function Team() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -82,7 +89,7 @@ function Team() {
         ...formData,
         userId: editingMember?.userId || user?.uid, //info del usuario
         userEmail: editingMember?.userEmail || user?.email,
-        createdAt: editingMember ? undefined : new Date() //timestamp
+        createdAt: editingMember ? undefined : new Date(), //timestamp
       };
 
       if (editingMember) {
@@ -160,9 +167,7 @@ function Team() {
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Gestión de Equipo
           </h2>
-          <p className="text-gray-600">
-            Administra los miembros del equipo
-          </p>
+          <p className="text-gray-600">Administra los miembros del equipo</p>
         </div>
         <button
           onClick={() => setShowForm(true)}
@@ -312,7 +317,8 @@ function Team() {
               <span className="font-medium">Email:</span> {member.email}
             </p>
             <p className="text-sm text-gray-600 mb-4">
-              <span className="font-medium">Departamento:</span> {member.department}
+              <span className="font-medium">Departamento:</span>{" "}
+              {member.department}
             </p>
 
             {member.skills && member.skills.length > 0 && (

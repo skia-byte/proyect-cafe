@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
-import { db } from "../FireBase";
+import { db } from "../FireBase/firebase";
 import {
-  collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  orderBy,
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 
@@ -17,7 +24,7 @@ function SkillsManager() {
     category: "",
     description: "",
     level: "Intermedio",
-    icon: "⭐"
+    icon: "⭐",
   });
 
   const loadSkills = () => {
@@ -45,7 +52,7 @@ function SkillsManager() {
       category: "",
       description: "",
       level: "Intermedio",
-      icon: "⭐"
+      icon: "⭐",
     });
     setEditingSkill(null);
     setShowForm(false);
@@ -55,7 +62,7 @@ function SkillsManager() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -69,7 +76,7 @@ function SkillsManager() {
         userId: editingSkill?.userId || user?.uid,
         userEmail: editingSkill?.userEmail || user?.email,
         createdAt: editingSkill ? undefined : new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       if (editingSkill) {
@@ -95,7 +102,7 @@ function SkillsManager() {
       category: skill.category || "",
       description: skill.description || "",
       level: skill.level || "Intermedio",
-      icon: skill.icon || "⭐"
+      icon: skill.icon || "⭐",
     });
     setShowForm(true);
   };
@@ -116,13 +123,13 @@ function SkillsManager() {
   // habilidades de cafetería
   const categories = [
     "Barismo",
-    "Atención al Cliente", 
+    "Atención al Cliente",
     "Gestión",
     "Cocina",
     "Repostería",
     "Limpieza",
     "Administración",
-    "Marketing"
+    "Marketing",
   ];
 
   const levels = ["Básico", "Intermedio", "Avanzado", "Experto"];
@@ -147,9 +154,7 @@ function SkillsManager() {
       <div className="p-6">
         <div className="flex items-center justify-center py-12">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
-          <span className="ml-2 text-gray-600">
-            Cargando habilidades...
-          </span>
+          <span className="ml-2 text-gray-600">Cargando habilidades...</span>
         </div>
       </div>
     );
@@ -210,7 +215,9 @@ function SkillsManager() {
                 >
                   <option value="">Seleccionar categoría</option>
                   {categories.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -227,7 +234,9 @@ function SkillsManager() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 >
                   {levels.map((level) => (
-                    <option key={level} value={level}>{level}</option>
+                    <option key={level} value={level}>
+                      {level}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -244,7 +253,9 @@ function SkillsManager() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 >
                   {icons.map((icon) => (
-                    <option key={icon} value={icon}>{icon} {icon}</option>
+                    <option key={icon} value={icon}>
+                      {icon} {icon}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -292,9 +303,7 @@ function SkillsManager() {
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-3">
-                <span className="text-white text-lg">
-                  {skill.icon || "⭐"}
-                </span>
+                <span className="text-white text-lg">{skill.icon || "⭐"}</span>
               </div>
               <div className="flex-1">
                 <h4 className="text-lg font-semibold text-gray-900">
@@ -311,15 +320,20 @@ function SkillsManager() {
             )}
 
             <div className="flex items-center justify-between mb-4">
-              <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                skill.level === "Básico" ? "bg-green-100 text-green-800" :
-                skill.level === "Intermedio" ? "bg-yellow-100 text-yellow-800" :
-                skill.level === "Avanzado" ? "bg-orange-100 text-orange-800" :
-                "bg-red-100 text-red-800"
-              }`}>
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  skill.level === "Básico"
+                    ? "bg-green-100 text-green-800"
+                    : skill.level === "Intermedio"
+                    ? "bg-yellow-100 text-yellow-800"
+                    : skill.level === "Avanzado"
+                    ? "bg-orange-100 text-orange-800"
+                    : "bg-red-100 text-red-800"
+                }`}
+              >
                 {skill.level}
               </span>
-              
+
               {skill.userEmail && (
                 <span className="text-xs text-gray-500">
                   Por: {skill.userEmail}

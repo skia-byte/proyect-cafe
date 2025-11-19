@@ -14,7 +14,8 @@ import NotFound from "./pages/NotFound";
 import LoginForm from "./pages/LoginForm";
 import Products from "./pages/Products";
 import MyProfile from "./pages/MyProfile";
-
+import Skills from "./pages/Skills";
+import Team from "./pages/Team";
 function App() {
   return (
     <div>
@@ -32,6 +33,8 @@ function App() {
             <Route path="/LoginForm" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/myprofile" element={<MyProfile />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/dashboard/team" element={<Team />} />
           </Routes>
         </Layout>
       </Router>
