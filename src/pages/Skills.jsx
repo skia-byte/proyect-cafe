@@ -75,24 +75,27 @@ function SkillsManager() {
         ...formData,
         userId: editingSkill?.userId || user?.uid,
         userEmail: editingSkill?.userEmail || user?.email,
-        createdAt: editingSkill ? undefined : new Date(),
         updatedAt: new Date(),
       };
 
-      if (editingSkill) {
-        const skillRef = doc(db, "skills", editingSkill.id);
-        await updateDoc(skillRef, skillData);
-      } else {
-        await addDoc(collection(db, "skills"), skillData);
-      }
-
-      resetForm();
-    } catch (error) {
-      console.error("Error al guardar:", error);
-      alert("Error al guardar la habilidad");
-      setLoading(false);
+    if (!editingSkill) {
+      skillData.createdAt = new Date();
     }
-  };
+
+    if (editingSkill) {
+      const skillRef = doc(db, "skills", editingSkill.id);
+      await updateDoc(skillRef, skillData);
+    } else {
+      await addDoc(collection(db, "skills"), skillData);
+    }
+
+    resetForm();
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    alert("Error al guardar la habilidad");
+    setLoading(false);
+  }
+};
 
   // edición
   const handleEdit = (skill) => {
