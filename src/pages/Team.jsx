@@ -68,47 +68,47 @@ function Team() {
     }));
   };
 
-// habilidades
-const handleSkillsChange = (e) => {
-  const inputValue = e.target.value;
-  setFormData((prev) => ({
-    ...prev,
-    skills: inputValue
-      .split(",")
-      .map((skill) => skill.trim())
-      .filter((skill) => skill),
-  }));
-};
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  // habilidades
+  const handleSkillsChange = (e) => {
+    const inputValue = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      skills: inputValue
+        .split(",")
+        .map((skill) => skill.trim())
+        .filter((skill) => skill),
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const memberData = {
-      ...formData,
-      userId: editingMember?.userId || user?.uid,
-      userEmail: editingMember?.userEmail || user?.email,
-      updatedAt: new Date(),
-    };
+    try {
+      const memberData = {
+        ...formData,
+        userId: editingMember?.userId || user?.uid,
+        userEmail: editingMember?.userEmail || user?.email,
+        updatedAt: new Date(),
+      };
 
-    if (!editingMember) {
-      memberData.createdAt = new Date();
+      if (!editingMember) {
+        memberData.createdAt = new Date();
+      }
+
+      if (editingMember) {
+        const memberRef = doc(db, "team", editingMember.id);
+        await updateDoc(memberRef, memberData);
+      } else {
+        await addDoc(collection(db, "team"), memberData);
+      }
+
+      resetForm();
+    } catch (error) {
+      console.error("Error al guardar:", error);
+      alert("Error al guardar el miembro del equipo");
+      setLoading(false);
     }
-
-    if (editingMember) {
-      const memberRef = doc(db, "team", editingMember.id);
-      await updateDoc(memberRef, memberData);
-    } else {
-      await addDoc(collection(db, "team"), memberData);
-    }
-
-    resetForm();
-  } catch (error) {
-    console.error("Error al guardar:", error);
-    alert("Error al guardar el miembro del equipo");
-    setLoading(false);
-  }
-};
+  };
   // función de edición
   const handleEdit = (member) => {
     setEditingMember(member);
@@ -173,7 +173,7 @@ const handleSubmit = async (e) => {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
         >
           Agregar Miembro
         </button>
@@ -262,25 +262,25 @@ const handleSubmit = async (e) => {
                 Habilidades (separadas por comas)
               </label>
               <input
-              type="text"
-              value={formData.skills.join(", ")}
-              onChange={handleSkillsChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="ej: Liderazgo, Programación, Diseño"
-              />            
+                type="text"
+                value={formData.skills.join(", ")}
+                onChange={handleSkillsChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="ej: Liderazgo, Programación, Diseño"
+              />
             </div>
 
             <div className="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
               >
                 {editingMember ? "Actualizar" : "Agregar"} Miembro
               </button>
@@ -350,13 +350,13 @@ const handleSubmit = async (e) => {
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleEdit(member)}
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="text-blue-600 hover:text-blue-700 text-sm font-medium cursor-pointer"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleDelete(member.id)}
-                  className="text-red-600 hover:text-red-700 text-sm font-medium"
+                  className="text-red-600 hover:text-red-700 text-sm font-medium cursor-pointer"
                 >
                   Eliminar
                 </button>
@@ -377,7 +377,7 @@ const handleSubmit = async (e) => {
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 cursor-pointer"
           >
             Agregar Primer Miembro
           </button>
