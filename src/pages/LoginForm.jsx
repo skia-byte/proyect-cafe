@@ -3,17 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const LoginForm = () => {
-  // 1. Obtener funciones y estados del contexto
   const { user, loginWithEmail, loginWithGoogle, isAdmin } = useAuth();
 
-  // 2. Estados locales para manejar inputs y mensajes
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState(null);
   const navigate = useNavigate(); // Hook para redirecciones
 
-  // 3. Redirigir si ya está logueado y es administrador
   useEffect(() => {
     // Si el usuario existe y es admin, redirigir inmediatamente al dashboard
     if (user && isAdmin) {
@@ -21,7 +18,7 @@ const LoginForm = () => {
     }
   }, [user, isAdmin, navigate]);
 
-  // 4. Manejo del envío del formulario
+  // Manejo del envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Limpia errores anteriores
@@ -29,7 +26,7 @@ const LoginForm = () => {
 
     try {
       await loginWithEmail(email, password);
-      // El useEffect se encargará de la redirección
+      // redirección
       setMessage({ type: "success", text: "Sesión iniciada correctamente." });
     } catch (err) {
       // Manejo de errores de Firebase
@@ -46,7 +43,7 @@ const LoginForm = () => {
     }
   };
 
-  // 5. Manejo de login con Google
+  //  Manejo de login con Google
   const handleGoogle = async () => {
     setError(""); // Limpia errores anteriores
     setMessage(null); // Limpia mensajes anteriores
@@ -58,7 +55,7 @@ const LoginForm = () => {
     }
   };
 
-  // 6. Si ya es administrador, no muestres el formulario (esto lo hace useEffect)
+  // Si ya es administrador, no muestres el formulario (ya redirigido)
   if (user && isAdmin) {
     return (
       <div className="text-center text-yellow-900">

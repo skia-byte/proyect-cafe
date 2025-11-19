@@ -75,8 +75,14 @@ export const AuthProvider = ({ children }) => {
 
   // Logout
   const logout = async () => {
-    console.log("Cerrando sesión...");
-    await signOut(auth);
+    try {
+      await signOut(auth);
+      console.log("Sesión cerrada exitosamente en Firebase.");
+    } catch (error) {
+      console.error("Error al cerrar sesión con Firebase:", error);
+
+      throw error;
+    }
   };
 
   // Validación de rol admin

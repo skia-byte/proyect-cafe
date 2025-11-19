@@ -2,10 +2,22 @@ import React from "react";
 import { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const { logout, user } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logout(); // Llama a la función de Firebase para cerrar sesión
+      navigate("/LoginForm");
+    } catch (error) {
+      console.error(
+        "Error durante el cierre de sesión y/o redirección:",
+        error
+      );
+    }
+  };
 
   return (
     <div className="admin-dashboard mt-24 px-4 flex justify-center">
@@ -61,7 +73,7 @@ function Dashboard() {
         </div>
 
         <button
-          onClick={logout}
+          onClick={handleLogout}
           className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
         >
           Cerrar Sesión
