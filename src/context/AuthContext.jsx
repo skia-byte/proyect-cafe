@@ -18,7 +18,7 @@ import {
 const AuthContext = createContext();
 
 // Lista de correos que tienen el rol de admin
-const ADMIN_EMAIL = ["fablazaromogollon@crackthecode.la"];
+const ADMIN_EMAIL = ["skiarayamile@gmail.com"];
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
