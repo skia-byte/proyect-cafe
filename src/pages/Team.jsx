@@ -80,33 +80,36 @@ function Team() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const memberData = {
-        ...formData,
-        userId: editingMember?.userId || user?.uid, //info del usuario
-        userEmail: editingMember?.userEmail || user?.email,
-        createdAt: editingMember ? undefined : new Date(), //timestamp
-      };
+  try {
+    const memberData = {
+      ...formData,
+      userId: editingMember?.userId || user?.uid,
+      userEmail: editingMember?.userEmail || user?.email,
+      updatedAt: new Date(),
+    };
 
-      if (editingMember) {
-        const memberRef = doc(db, "team", editingMember.id);
-        await updateDoc(memberRef, memberData);
-      } else {
-        await addDoc(collection(db, "team"), memberData);
-      }
-
-      resetForm();
-    } catch (error) {
-      console.error("Error al guardar:", error);
-      alert("Error al guardar el miembro del equipo");
-      setLoading(false);
+    if (!editingMember) {
+      memberData.createdAt = new Date();
     }
-  };
 
+    if (editingMember) {
+      const memberRef = doc(db, "team", editingMember.id);
+      await updateDoc(memberRef, memberData);
+    } else {
+      await addDoc(collection(db, "team"), memberData);
+    }
+
+    resetForm();
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    alert("Error al guardar el miembro del equipo");
+    setLoading(false);
+  }
+};
   // función de edición
   const handleEdit = (member) => {
     setEditingMember(member);
