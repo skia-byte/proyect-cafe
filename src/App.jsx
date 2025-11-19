@@ -31,9 +31,9 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/LoginForm" element={<LoginForm />} />
+            <Route path="/loginform" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
-            <Route path="/dashboard/myprofile" element={<MyProfile />} />
+            <Route path="/dashboard/my-profile" element={<MyProfile />} />
             <Route path="/dashboard/skills" element={<Skills />} />
             <Route path="/dashboard/team" element={<Team />} />
           </Routes>

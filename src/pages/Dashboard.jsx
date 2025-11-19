@@ -36,7 +36,7 @@ function Dashboard() {
           <ul className="space-y-3">
             <li>
               <Link
-                to="/dashboard/myprofile"
+                to="/dashboard/my-profile"
                 className="block px-4 py-3 bg-[#7d5940] text-white hover:bg-[#4a2e1e] rounded text-lg"
               >
                 Mi perfil
