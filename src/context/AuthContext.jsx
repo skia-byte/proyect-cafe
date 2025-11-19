@@ -21,6 +21,7 @@ const AuthContext = createContext();
 const ADMIN_EMAIL = [
   "skiarayamile@gmail.com",
   "fablazaromogollon@crackthecode.la",
+  "noealcasanchez@crackthecode.la",
 ];
 
 export const AuthProvider = ({ children }) => {
@@ -35,12 +36,12 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      // No necesitas setUser aquí, onAuthStateChanged (en tu useEffect) lo hará.
+
       console.log("Usuario registrado con éxito:", userCredential.user.email);
       return userCredential.user; // Opcional: retornar el usuario
     } catch (error) {
       console.error("Error de registro:", error.message);
-      throw error; // Lanza el error para que el componente lo maneje (ej: mostrar mensaje)
+      throw error;
     }
   };
 
