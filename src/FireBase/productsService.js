@@ -19,5 +19,5 @@ export const addProduct = async (product) => {
 };
 
 export const deleteProduct = async (id) => {
-  await deleteDoc(doc(db, "products", productId));
+  await deleteDoc(doc(db, "products", id));
 };
