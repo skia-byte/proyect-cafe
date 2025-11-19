@@ -20,7 +20,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="admin-dashboard mt-24 px-4 flex justify-center">
+    <div className="admin-dashboard my-24 px-4 flex justify-center">
       <div className="bg-[#f2e7d9] shadow-xl rounded-xl p-8 w-full max-w-2xl">
         <h2 className="text-3xl font bold text-center mb-2 text-[#4a2e1e]">
           Bienvenido, Administrador de Café Aroma
@@ -74,7 +74,7 @@ function Dashboard() {
 
         <button
           onClick={handleLogout}
-          className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          className="mt-6 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
         >
           Cerrar Sesión
         </button>
