@@ -6,7 +6,6 @@ import {
 } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 
-
 const StarRating = ({ stars = 0, onChange = null }) => {
   return (
     <div className="flex space-x-1 text-2xl">
@@ -27,7 +26,6 @@ const StarRating = ({ stars = 0, onChange = null }) => {
   );
 };
 
-
 const starsToLevel = (stars) => {
   if (stars <= 1) return "Básico";
   if (stars === 2) return "Básico+";
@@ -39,55 +37,95 @@ const starsToLevel = (stars) => {
 
 function EmployeeSkillsManager() {
   const { isAdmin, user } = useAuth();
+  
   const [employees, setEmployees] = useState([]);
   const [skills, setSkills] = useState([]);
   const [employeeSkills, setEmployeeSkills] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState("");
+
   const [showForm, setShowForm] = useState(false);
   const [currentSkill, setCurrentSkill] = useState(null);
 
-
+  // -----------------------------------------
+  // 🔹 Cargar empleados (solo 1 vez)
+  // -----------------------------------------
   useEffect(() => {
-    const unsubEmployees = onSnapshot(
+    const unsub = onSnapshot(
       query(collection(db, "employees"), orderBy("name")),
       (snapshot) => {
         const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
         setEmployees(list);
+
+        // Elegir primero si no hay seleccionado
         if (list.length > 0 && !selectedEmployee) {
           setSelectedEmployee(list[0].id);
         }
       }
     );
 
-    const unsubSkills = onSnapshot(
+    return () => unsub();
+  }, []);
+
+  // -----------------------------------------
+  // 🔹 Cargar skills (solo 1 vez)
+  // -----------------------------------------
+  useEffect(() => {
+    const unsub = onSnapshot(
       query(collection(db, "skills"), orderBy("name")),
       (snapshot) => {
         setSkills(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
       }
     );
 
-    // empleado seleccionado
-    let unsubEvaluations = () => {};
-    if (selectedEmployee) {
-      const q = query(
-        collection(db, "employee_skills"),
-        where("employeeId", "==", selectedEmployee),
-        orderBy("skillId")
-      );
+    return () => unsub();
+  }, []);
 
-      unsubEvaluations = onSnapshot(q, (snapshot) => {
-        setEmployeeSkills(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
-      });
-    }
+  // -----------------------------------------
+  // 🔹 Cargar evaluaciones según empleado
+  // -----------------------------------------
+  useEffect(() => {
+    if (!selectedEmployee) return;
 
-    return () => {
-      unsubEmployees();
-      unsubSkills();
-      unsubEvaluations();
-    };
+    // limpiar formulario al cambiar empleado
+    setShowForm(false);
+    setCurrentSkill(null);
+
+    const q = query(
+      collection(db, "employee_skills"),
+      where("employeeId", "==", selectedEmployee)
+    );
+
+    const unsub = onSnapshot(q, (snapshot) => {
+      const evaluations = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      evaluations.sort((a, b) => a.skillName?.localeCompare(b.skillName || ""));
+      setEmployeeSkills(evaluations);
+    });
+
+    return () => unsub();
   }, [selectedEmployee]);
 
+  // -----------------------------------------
+  // 🔹 Datos del empleado seleccionado
+  // -----------------------------------------
+  const selectedEmployeeData = employees.find(emp => emp.id === selectedEmployee);
 
+  // -----------------------------------------
+  // 🔹 Filtrar habilidades por puesto
+  // -----------------------------------------
+  const filteredSkills = (() => {
+    if (!selectedEmployeeData || !selectedEmployeeData.position) {
+      return skills;
+    }
+
+    return skills.filter(skill => {
+      if (!skill.positions || skill.positions.length === 0) return true;
+      return skill.positions.includes(selectedEmployeeData.position);
+    });
+  })();
+
+  // -----------------------------------------
+  // 🔹 Guardar evaluación
+  // -----------------------------------------
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -119,21 +157,27 @@ function EmployeeSkillsManager() {
     }
   };
 
-
+  // -----------------------------------------
+  // 🔹 Eliminar evaluación
+  // -----------------------------------------
   const handleDeleteEvaluation = async (evalId) => {
-    if (!window.confirm("¿Estás seguro de eliminar esta evaluación?")) {
-      return;
-    }
+    if (!window.confirm("¿Estás seguro de eliminar esta evaluación?")) return;
 
     try {
       await deleteDoc(doc(db, "employee_skills", evalId));
+
+      // limpiar formulario si estaba abierta
+      setCurrentSkill(null);
+      setShowForm(false);
     } catch (error) {
       console.error("Error eliminando evaluación:", error);
       alert("Error al eliminar la evaluación");
     }
   };
 
-
+  // -----------------------------------------
+  // 🔹 Iniciar evaluación
+  // -----------------------------------------
   const startEvaluation = (skill) => {
     const existing = employeeSkills.find(
       (e) => e.skillId === skill.id && e.employeeId === selectedEmployee
@@ -150,7 +194,9 @@ function EmployeeSkillsManager() {
     setShowForm(true);
   };
 
-
+  // -----------------------------------------
+  // 🔹 Si no es admin
+  // -----------------------------------------
   if (!isAdmin) {
     return (
       <div className="text-center py-8">
@@ -160,27 +206,40 @@ function EmployeeSkillsManager() {
     );
   }
 
-
+  // -----------------------------------------
+  // 🔹 Render principal
+  // -----------------------------------------
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Evaluación de Habilidades</h2>
 
       {/* Selector empleado */}
       <div className="bg-white p-4 rounded-lg border border-gray-200 mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Empleado:
-        </label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Empleado:</label>
+
         <select
           value={selectedEmployee}
           onChange={(e) => setSelectedEmployee(e.target.value)}
-          className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+          className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-md"
         >
           {employees.map((emp) => (
             <option key={emp.id} value={emp.id}>
-              {emp.name}
+              {emp.name} - {emp.position}
             </option>
           ))}
         </select>
+
+        {selectedEmployeeData && (
+          <div className="mt-3 p-3 bg-amber-50 rounded-md">
+            <p className="text-sm text-amber-800">
+              <strong>Puesto:</strong> {selectedEmployeeData.position}
+              {selectedEmployeeData.department && ` • ${selectedEmployeeData.department}`}
+            </p>
+            <p className="text-xs text-amber-600 mt-1">
+              Mostrando {filteredSkills.length} habilidades para este puesto
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Formulario evaluación */}
@@ -212,7 +271,7 @@ function EmployeeSkillsManager() {
                   setCurrentSkill((prev) => ({ ...prev, notes: e.target.value }))
                 }
                 rows="3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 placeholder="Observaciones..."
               />
             </div>
@@ -220,14 +279,15 @@ function EmployeeSkillsManager() {
             <div className="flex justify-end space-x-3">
               <button
                 type="button"
-                onClick={() => setShowForm(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 cursor-pointer"
+                onClick={() => { setShowForm(false); setCurrentSkill(null); }}
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700"
               >
                 Cancelar
               </button>
+
               <button
                 type="submit"
-                className="bg-amber-600 text-white px-6 py-2 rounded-md font-medium hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 cursor-pointer"
+                className="bg-amber-600 text-white px-6 py-2 rounded-md font-medium"
               >
                 Guardar
               </button>
@@ -238,7 +298,7 @@ function EmployeeSkillsManager() {
 
       {/* Lista habilidades */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {skills.map((skill) => {
+        {filteredSkills.map((skill) => {
           const evaluation = employeeSkills.find(
             (e) => e.skillId === skill.id && e.employeeId === selectedEmployee
           );
@@ -257,19 +317,22 @@ function EmployeeSkillsManager() {
                 <div className="space-y-3">
                   <StarRating stars={evaluation.stars} />
                   <p className="text-sm text-gray-600">{evaluation.level}</p>
+
                   {evaluation.notes && (
                     <p className="text-sm text-gray-600 bg-gray-50 p-2 rounded">📝 {evaluation.notes}</p>
                   )}
+
                   <div className="flex justify-between items-center pt-2">
                     <button
                       onClick={() => startEvaluation(skill)}
-                      className="text-amber-600 hover:text-amber-700 text-sm font-medium cursor-pointer"
+                      className="text-amber-600 hover:text-amber-700 text-sm font-medium"
                     >
                       Re-evaluar
                     </button>
+
                     <button
                       onClick={() => handleDeleteEvaluation(evaluation.id)}
-                      className="text-red-600 hover:text-red-700 text-sm font-medium cursor-pointer"
+                      className="text-red-600 hover:text-red-700 text-sm font-medium"
                     >
                       Eliminar
                     </button>
@@ -278,7 +341,7 @@ function EmployeeSkillsManager() {
               ) : (
                 <button
                   onClick={() => startEvaluation(skill)}
-                  className="text-amber-600 hover:text-amber-700 text-sm font-medium cursor-pointer"
+                  className="text-amber-600 hover:text-amber-700 text-sm font-medium"
                 >
                   + Evaluar
                 </button>
@@ -288,9 +351,17 @@ function EmployeeSkillsManager() {
         })}
       </div>
 
-      {skills.length === 0 && (
+      {filteredSkills.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-gray-600">No hay habilidades configuradas.</p>
+          <div className="text-4xl mb-4">🔍</div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            No hay habilidades configuradas para este puesto
+          </h3>
+          <p className="text-gray-600">
+            {selectedEmployeeData 
+              ? `No se encontraron habilidades para el puesto: ${selectedEmployeeData.position}`
+              : "Selecciona un empleado para ver sus habilidades"}
+          </p>
         </div>
       )}
     </div>
