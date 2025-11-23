@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 import LoginForm from "./pages/LoginForm";
 import Products from "./pages/Products";
 import MyProfile from "./pages/MyProfile";
-import Skills from "./pages/Skills";
+import EmployeeSkillsManager from "./pages/EmployeeSkillsManager";
 import Team from "./pages/Team";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             <Route path="/login-form" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
-            <Route path="/dashboard/skills" element={<Skills />} />
+            <Route path="/dashboard/employee-skills" element={<EmployeeSkillsManager />} />
             <Route path="/dashboard/team" element={<Team />} />
           </Routes>
         </Layout>
