@@ -10,10 +10,10 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { useAuth } from "../context/AuthContext"; // contexto de auth
+import { useAuth } from "../context/AuthContext";
 
 function Team() {
-  const { isAdmin, user } = useAuth(); // verificación de admin
+  const { isAdmin, user } = useAuth();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -27,6 +27,8 @@ function Team() {
     bio: "",
     skills: [],
   });
+
+  const [skillsInput, setSkillsInput] = useState("");
 
   const loadTeamMembers = () => {
     const q = query(collection(db, "team"), orderBy("name"));
@@ -58,6 +60,7 @@ function Team() {
     });
     setEditingMember(null);
     setShowForm(false);
+    setSkillsInput("");
   };
 
   const handleInputChange = (e) => {
@@ -68,17 +71,19 @@ function Team() {
     }));
   };
 
-  // habilidades
   const handleSkillsChange = (e) => {
-    const inputValue = e.target.value;
+    const value = e.target.value;
+    setSkillsInput(value);
+
     setFormData((prev) => ({
       ...prev,
-      skills: inputValue
+      skills: value
         .split(",")
         .map((skill) => skill.trim())
-        .filter((skill) => skill),
+        .filter((skill) => skill.length > 0),
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -109,7 +114,7 @@ function Team() {
       setLoading(false);
     }
   };
-  // función de edición
+
   const handleEdit = (member) => {
     setEditingMember(member);
     setFormData({
@@ -120,19 +125,20 @@ function Team() {
       bio: member.bio || "",
       skills: member.skills || [],
     });
+
+    setSkillsInput((member.skills || []).join(", "));
+
     setShowForm(true);
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("¿Estás seguro de eliminar este miembro?")) {
-      return;
-    }
+    if (!window.confirm("¿Estás seguro de eliminar este miembro?")) return;
 
     try {
       await deleteDoc(doc(db, "team", id));
     } catch (error) {
       console.error("Error eliminando miembro: ", error);
-      alert("Error al eliminar el miembro del equipo"); // ✅ AGREGAR: alert
+      alert("Error al eliminar el miembro del equipo");
     }
   };
 
@@ -149,6 +155,7 @@ function Team() {
       </div>
     );
   }
+
   if (loading && teamMembers.length === 0) {
     return (
       <div className="p-6">
@@ -173,18 +180,18 @@ function Team() {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+          className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 cursor-pointer"
         >
           Agregar Miembro
         </button>
       </div>
 
-      {/*formulario condicional*/}
       {showForm && (
-        <div className="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+        <div className="bg-white p-6 rounded-lg border mb-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             {editingMember ? "Editar Miembro" : "Agregar Nuevo Miembro"}
           </h3>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -197,10 +204,11 @@ function Team() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
 
+              {/* role */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Rol *
@@ -211,10 +219,11 @@ function Team() {
                   value={formData.role}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
 
+              {/* email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email *
@@ -225,7 +234,7 @@ function Team() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
 
@@ -239,7 +248,7 @@ function Team() {
                   value={formData.department}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
             </div>
@@ -253,7 +262,7 @@ function Team() {
                 value={formData.bio}
                 onChange={handleInputChange}
                 rows="3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border rounded-md"
               />
             </div>
 
@@ -263,9 +272,9 @@ function Team() {
               </label>
               <input
                 type="text"
-                value={formData.skills.join(", ")}
+                value={skillsInput}
                 onChange={handleSkillsChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border rounded-md"
                 placeholder="ej: Liderazgo, Programación, Diseño"
               />
             </div>
@@ -274,14 +283,11 @@ function Team() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+                className="px-4 py-2 border rounded-md"
               >
                 Cancelar
               </button>
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
-              >
+              <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md">
                 {editingMember ? "Actualizar" : "Agregar"} Miembro
               </button>
             </div>
@@ -291,49 +297,36 @@ function Team() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member) => (
-          <div
-            key={member.id}
-            className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow"
-          >
+          <div key={member.id} className="bg-white border p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-3">
-                <span className="text-white text-lg font-bold">
-                  {member.name?.charAt(0) || "U"}
-                </span>
+              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                {member.name?.charAt(0)}
               </div>
-              <div className="flex-1">
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {member.name}
-                </h4>
+
+              <div className="ml-3">
+                <h4 className="text-lg font-semibold">{member.name}</h4>
                 <p className="text-sm text-blue-600">{member.role}</p>
               </div>
             </div>
 
             {member.bio && (
-              <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                {member.bio}
-              </p>
+              <p className="text-gray-600 text-sm mb-4">{member.bio}</p>
             )}
 
-            <p className="text-sm text-gray-600 mb-2">
-              <span className="font-medium">Email:</span> {member.email}
-            </p>
-            <p className="text-sm text-gray-600 mb-4">
-              <span className="font-medium">Departamento:</span>{" "}
-              {member.department}
+            <p className="text-sm mb-2">
+              <strong>Email:</strong> {member.email}
             </p>
 
-            {member.skills && member.skills.length > 0 && (
+            <p className="text-sm mb-4">
+              <strong>Departamento:</strong> {member.department}
+            </p>
+
+            {member.skills?.length > 0 && (
               <div className="mb-4">
-                <p className="text-xs font-medium text-gray-500 mb-2">
-                  HABILIDADES
-                </p>
+                <p className="text-xs font-medium text-gray-500 mb-2">HABILIDADES</p>
                 <div className="flex flex-wrap gap-1">
                   {member.skills.slice(0, 3).map((skill, index) => (
-                    <span
-                      key={index}
-                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                    >
+                    <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                       {skill}
                     </span>
                   ))}
@@ -346,21 +339,20 @@ function Team() {
               </div>
             )}
 
-            <div className="flex justify-end items-center pt-4 border-t">
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => handleEdit(member)}
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium cursor-pointer"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(member.id)}
-                  className="text-red-600 hover:text-red-700 text-sm font-medium cursor-pointer"
-                >
-                  Eliminar
-                </button>
-              </div>
+            <div className="flex justify-end pt-4 border-t">
+              <button
+                onClick={() => handleEdit(member)}
+                className="text-blue-600 mr-3"
+              >
+                Editar
+              </button>
+
+              <button
+                onClick={() => handleDelete(member.id)}
+                className="text-red-600"
+              >
+                Eliminar
+              </button>
             </div>
           </div>
         ))}
@@ -369,15 +361,13 @@ function Team() {
       {teamMembers.length === 0 && !loading && (
         <div className="text-center py-8">
           <div className="text-4xl mb-4">👥</div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
-            No hay miembros del equipo
-          </h3>
+          <h3 className="text-lg font-medium">No hay miembros del equipo</h3>
           <p className="text-gray-600 mb-4">
             Comienza agregando el primer miembro del equipo.
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700 cursor-pointer"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md"
           >
             Agregar Primer Miembro
           </button>
