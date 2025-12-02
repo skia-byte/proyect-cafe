@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import MyProfile from "./pages/MyProfile";
 import Skills from "./pages/Skills";
 import Team from "./pages/Team";
+import Publicity from "./pages/Publicity";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
             <Route path="/dashboard/skills" element={<Skills />} />
             <Route path="/dashboard/team" element={<Team />} />
+            <Route path="/publicity" element={<Publicity />} />
           </Routes>
         </Layout>
       </Router>
