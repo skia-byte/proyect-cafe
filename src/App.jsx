@@ -1,7 +1,6 @@
 import React from "react";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import ComplaintsBook from "./pages/ComplaintsBook";
@@ -15,6 +14,9 @@ import MyProfile from "./pages/MyProfile";
 import EmployeeSkillsManager from "./pages/EmployeeSkillsManager";
 import Team from "./pages/Team";
 import Publicity from "./pages/Publicity";
+import CoffeeMenuPage from "./pages/CoffeeMenuPage";
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -33,9 +35,15 @@ function App() {
             <Route path="/login-form" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
-            <Route path="/dashboard/employee-skills" element={<EmployeeSkillsManager />} />
+            <Route
+              path="/dashboard/employee-skills-manager"
+              element={<EmployeeSkillsManager />}
+            />
             <Route path="/dashboard/team" element={<Team />} />
             <Route path="/publicity" element={<Publicity />} />
+            <Route path="/coffee-menu" element={<CoffeeMenuPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Layout>
       </Router>
