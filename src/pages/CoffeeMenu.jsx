@@ -8,11 +8,17 @@ const CoffeeMenu = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const data = await getAllProducts();
+      console.log("PRODUCTOS DESDE FIREBASE:", data);
       setProducts(data);
     };
 
     fetchProducts();
   }, []);
+
+  {
+    /* Menú desactualizado*/
+  }
+  console.log("ESTOY EN CoffeeMenuPage");
 
   return (
     <div>
