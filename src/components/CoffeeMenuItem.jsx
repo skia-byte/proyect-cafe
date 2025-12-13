@@ -1,43 +1,27 @@
-import { useCart } from "../context/CartContext";
-import menuData from "../data/menu.json";
+import React from "react";
 
-const CoffeeMenuItem = () => {
+const CoffeeMenuItem = ({ product }) => {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-      {menuData.map((item) => (
-        <div
-          key={item.id}
-          className="bg-white p-4 rounded-xl shadow-md border border-gray-100 md:p-6 lg:p-8"
-        >
-          {/* Nombre y precio */}
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="text-lg font-semibold text-gray-800 md:text-xl lg:text-2xl">
-              {item.nombre}
-            </h3>
-            <p className="text-xl font-bold text-green-700 ml-4 md:text-2xl lg:text-3xl">
-              ${item.precio.toFixed(2)}
-            </p>
-          </div>
+    <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+      <div className="flex justify-between items-start mb-2">
+        {/* Nombre del Café */}
+        <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
 
-          {/* Descripción */}
-          <p className="text-sm text-gray-600 mb-3 md:text-base lg:text-lg">
-            {item.descripcion}
-          </p>
+        {/* Precio */}
+        <p className="text-2xl font-bold text-green-700 ml-4">
+          ${product.price?.toFixed(2)}
+        </p>
+      </div>
 
-          {/* Origen y tostado */}
-          <p className="text-xs font-medium text-amber-700 bg-amber-100 py-1 px-2 rounded-full inline-block md:text-sm lg:text-base">
-            Origen: {item.origen}
-          </p>
-          <p className="text-xs text-gray-500 mt-1 md:text-sm lg:text-base">
-            Tostado: {item.tostado}
-          </p>
+      {/* Descripción */}
+      <p className="text-gray-600 mb-3 text-sm">{product.description}</p>
 
-          {/* Botón para carrito */}
-          <button className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition text-sm md:text-base lg:text-lg">
-            Agregar al carrito
-          </button>
-        </div>
-      ))}
+      {/* Origen */}
+      {product.origin && (
+        <p className="text-xs font-medium text-amber-700 bg-amber-100 py-1 px-2 rounded-full inline-block">
+          Origen: {product.origin}
+        </p>
+      )}
     </div>
   );
 };
