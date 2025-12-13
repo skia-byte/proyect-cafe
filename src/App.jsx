@@ -15,7 +15,7 @@ import MyProfile from "./pages/MyProfile";
 import EmployeeSkillsManager from "./pages/EmployeeSkillsManager";
 import Team from "./pages/Team";
 import Publicity from "./pages/Publicity";
-import CoffeeMenuPage from "./pages/CoffeeMenuPage";
+import CoffeeMenu from "./pages/CoffeeMenu";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 
@@ -42,7 +42,7 @@ function App() {
             />
             <Route path="/dashboard/team" element={<Team />} />
             <Route path="/publicity" element={<Publicity />} />
-            <Route path="/coffee-menu" element={<CoffeeMenuPage />} />
+            <Route path="/coffee-menu" element={<CoffeeMenu />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>

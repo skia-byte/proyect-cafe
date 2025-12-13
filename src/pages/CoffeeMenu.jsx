@@ -1,7 +1,7 @@
 import React from "react";
 import CoffeeMenuItem from "../components/CoffeeMenuItem";
 
-const CoffeeMenuPage = () => {
+const CoffeeMenu = () => {
   return (
     <div>
       {/* Encabezado */}
@@ -34,4 +34,4 @@ const CoffeeMenuPage = () => {
   );
 };
 
-export default CoffeeMenuPage;
+export default CoffeeMenu;
