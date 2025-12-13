@@ -12,10 +12,10 @@ export const CartProvider = ({ children }) => {
     // Verificamos si el producto ya existe en el carrito
     const exists = items.find((i) => i.id === item.id);
     if (exists) {
-      // Si existe, aumentamos la cantidad
+      // Si existe, aumentamos la cantidad (aseguramos que nunca sea undefined)
       setItems(
         items.map((i) =>
-          i.id === item.id ? { ...i, cantidad: i.cantidad + 1 } : i
+          i.id === item.id ? { ...i, cantidad: (i.cantidad || 1) + 1 } : i
         )
       );
     } else {

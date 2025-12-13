@@ -2,8 +2,11 @@ import { useState } from "react";
 import logo from "../img/logonav.png";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext"; // Importamos el carrito
+
 function Navbar() {
   const { user, isAdmin } = useAuth();
+  const { items } = useCart(); // Obtenemos los productos del carrito
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -21,15 +24,16 @@ function Navbar() {
       href: "/login-form",
       requiresAuth: false,
     },
+    { name: "Carrito 🛒", href: "/cart" }, // 🔹 Agregamos el carrito
   ];
+
   const filteredNavigation = navigation.filter((item) => {
-    // Si el nombre es 'Dashboard', solo lo devuelve si es Admin.
     if (item.name === "Dashboard") {
       return true;
     }
-    // Para todos los demás enlaces ('Inicio', 'Menu', etc.), los devuelve siempre.
     return true;
   });
+
   return (
     <header>
       <nav className="fixed top-0 left-0 w-full bg-[#fdf2dd] shadow-md z-50">
@@ -41,6 +45,7 @@ function Navbar() {
               className="h-16 w-auto object-contain"
             />
           </div>
+
           {/* Botón menú para celulares*/}
           <div className="md:hidden flex items-center">
             <button
@@ -85,12 +90,18 @@ function Navbar() {
                   }`}
                 >
                   {item.name}
+                  {/* 🔹 Mostrar cantidad de productos en el carrito */}
+                  {item.name === "Carrito 🛒" && items.length > 0 && (
+                    <span className="ml-1 text-sm text-red-600">
+                      ({items.length})
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
 
-          {/*Navegación móvil*/}
+          {/* Navegación móvil */}
           {isMenuOpen && (
             <div className="md:hidden bg-[#fdf2dd] border-t border-[#e5d3b3]">
               <div className="px-4 pt-2 space-y-2">
@@ -105,8 +116,13 @@ function Navbar() {
                         : "text-[#704c2b] hover:text-[#A59385] hover:bg-[#f8e9c7]"
                     }`}
                   >
-                    {" "}
-                    {item.name}{" "}
+                    {item.name}
+                    {/* 🔹 Mostrar cantidad también en móvil */}
+                    {item.name === "Carrito 🛒" && items.length > 0 && (
+                      <span className="ml-1 text-sm text-red-600">
+                        ({items.length})
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>

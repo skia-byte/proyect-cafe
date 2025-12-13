@@ -8,7 +8,7 @@ const CartPage = () => {
   const total = items.reduce((sum, i) => sum + i.precio * i.cantidad, 0);
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Tu Carrito 🛒</h2>
 
       {/* Si el carrito está vacío */}
@@ -26,7 +26,7 @@ const CartPage = () => {
                 <span>${(i.precio * i.cantidad).toFixed(2)}</span>
                 <button
                   onClick={() => removeItem(i.id)}
-                  className="text-red-600 text-sm"
+                  className="text-red-600 text-sm hover:cursor-pointer"
                 >
                   Eliminar
                 </button>
@@ -38,7 +38,7 @@ const CartPage = () => {
           <p className="mt-4 font-semibold">Total: ${total.toFixed(2)}</p>
           <button
             onClick={clearCart}
-            className="mt-4 bg-gray-300 px-4 py-2 rounded"
+            className="mt-4 bg-gray-300 px-4 py-2 rounded hover:cursor-pointer"
           >
             Vaciar carrito
           </button>
