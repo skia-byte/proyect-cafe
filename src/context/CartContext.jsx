@@ -15,12 +15,12 @@ export const CartProvider = ({ children }) => {
       // Si existe, aumentamos la cantidad (aseguramos que nunca sea undefined)
       setItems(
         items.map((i) =>
-          i.id === item.id ? { ...i, cantidad: (i.cantidad || 1) + 1 } : i
+          i.id === item.id ? { ...i, quantity: (i.quantity || 1) + 1 } : i
         )
       );
     } else {
       // Si no existe, lo agregamos con cantidad inicial = 1
-      setItems([...items, { ...item, cantidad: 1 }]);
+      setItems([...items, { ...item, quantity: 1 }]);
     }
   };
 

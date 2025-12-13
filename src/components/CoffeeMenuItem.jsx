@@ -35,8 +35,8 @@ const CoffeeMenuItem = ({ product }) => {
         onClick={() =>
           addItem({
             id: product.id,
-            nombre: product.name,
-            precio: product.price,
+            name: product.name,
+            price: product.price,
           })
         }
         className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 hover:cursor-pointer transition text-sm md:text-base lg:text-lg"

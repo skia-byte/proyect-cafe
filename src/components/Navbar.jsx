@@ -2,11 +2,11 @@ import { useState } from "react";
 import logo from "../img/logonav.png";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext"; // Importamos el carrito
+import { useCart } from "../context/CartContext";
 
 function Navbar() {
   const { user, isAdmin } = useAuth();
-  const { items } = useCart(); // Obtenemos los productos del carrito
+  const { items } = useCart(); // Productos del carrito
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -19,25 +19,17 @@ function Navbar() {
     { name: "Contáctanos", href: "/contact-us" },
     { name: "Libro de reclamaciones", href: "/complaints" },
     { name: "Misión y Visión", href: "/mission-vision" },
-    {
-      name: "Iniciar Sesión",
-      href: "/login-form",
-      requiresAuth: false,
-    },
-    { name: "Carrito 🛒", href: "/cart" }, // 🔹 Agregamos el carrito
+    { name: "Iniciar Sesión", href: "/login-form", requiresAuth: false },
+    { name: "Carrito 🛒", href: "/cart" },
   ];
 
-  const filteredNavigation = navigation.filter((item) => {
-    if (item.name === "Dashboard") {
-      return true;
-    }
-    return true;
-  });
+  const filteredNavigation = navigation.filter((item) => true);
 
   return (
     <header>
       <nav className="fixed top-0 left-0 w-full bg-[#fdf2dd] shadow-md z-50">
         <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center">
             <img
               src={logo}
@@ -46,7 +38,7 @@ function Navbar() {
             />
           </div>
 
-          {/* Botón menú para celulares*/}
+          {/* Botón menú móvil */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -90,8 +82,8 @@ function Navbar() {
                   }`}
                 >
                   {item.name}
-                  {/* 🔹 Mostrar cantidad de productos en el carrito */}
-                  {item.name === "Carrito 🛒" && items.length > 0 && (
+                  {/* 🔹 Contador del carrito siempre visible */}
+                  {item.name === "Carrito 🛒" && (
                     <span className="ml-1 text-sm text-red-600">
                       ({items.length})
                     </span>
@@ -117,8 +109,8 @@ function Navbar() {
                     }`}
                   >
                     {item.name}
-                    {/* 🔹 Mostrar cantidad también en móvil */}
-                    {item.name === "Carrito 🛒" && items.length > 0 && (
+                    {/* 🔹 Contador también en móvil */}
+                    {item.name === "Carrito 🛒" && (
                       <span className="ml-1 text-sm text-red-600">
                         ({items.length})
                       </span>
