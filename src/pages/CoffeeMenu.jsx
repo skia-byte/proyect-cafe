@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllProducts } from "../FireBase/productsService";
 import CoffeeMenuItem from "../components/CoffeeMenuItem";
 
 const CoffeeMenu = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getAllProducts();
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div>
       {/* Encabezado */}
@@ -21,7 +33,15 @@ const CoffeeMenu = () => {
           Especialidades
         </h2>
 
-        <CoffeeMenuItem />
+        {products.length === 0 ? (
+          <p className="text-gray-500">No hay cafés disponibles todavía.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <CoffeeMenuItem key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Pie de Página */}
