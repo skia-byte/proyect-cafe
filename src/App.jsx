@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import ComplaintsBook from "./pages/ComplaintsBook";
@@ -36,7 +37,7 @@ function App() {
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
             <Route
-              path="/dashboard/employee-skills-manager"
+              path="/dashboard/employee-skills"
               element={<EmployeeSkillsManager />}
             />
             <Route path="/dashboard/team" element={<Team />} />
