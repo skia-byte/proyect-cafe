@@ -15,6 +15,9 @@ import MyProfile from "./pages/MyProfile";
 import EmployeeSkillsManager from "./pages/EmployeeSkillsManager";
 import Team from "./pages/Team";
 import Publicity from "./pages/Publicity";
+import CoffeeMenu from "./pages/CoffeeMenu";
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -33,9 +36,15 @@ function App() {
             <Route path="/login-form" element={<LoginForm />} />
             <Route path="/dashboard/products" element={<Products />} />
             <Route path="/dashboard/my-profile" element={<MyProfile />} />
-            <Route path="/dashboard/employee-skills" element={<EmployeeSkillsManager />} />
+            <Route
+              path="/dashboard/employee-skills"
+              element={<EmployeeSkillsManager />}
+            />
             <Route path="/dashboard/team" element={<Team />} />
             <Route path="/publicity" element={<Publicity />} />
+            <Route path="/coffee-menu" element={<CoffeeMenu />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Layout>
       </Router>
