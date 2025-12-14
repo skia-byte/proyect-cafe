@@ -14,41 +14,32 @@ import Products from "./pages/Products";
 import MyProfile from "./pages/MyProfile";
 import EmployeeSkillsManager from "./pages/EmployeeSkillsManager";
 import Team from "./pages/Team";
-import Publicity from "./pages/Publicity";
-import CartPage from "./pages/CartPage";
-import Checkout from "./pages/Checkout";
-import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <div>
-      <CartProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/complaints" element={<ComplaintsBook />} />
-              <Route path="/mission-vision" element={<MissionAndVision />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/login-form" element={<LoginForm />} />
-              <Route path="/dashboard/products" element={<Products />} />
-              <Route path="/dashboard/my-profile" element={<MyProfile />} />
-              <Route
-                path="/dashboard/employee-skills"
-                element={<EmployeeSkillsManager />}
-              />
-              <Route path="/dashboard/team" element={<Team />} />
-              <Route path="/publicity" element={<Publicity />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/checkout" element={<Checkout />} />
-            </Routes>
-          </Layout>
-        </Router>
-      </CartProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/complaints" element={<ComplaintsBook />} />
+            <Route path="/mission-vision" element={<MissionAndVision />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login-form" element={<LoginForm />} />
+            <Route path="/dashboard/products" element={<Products />} />
+            <Route path="/dashboard/my-profile" element={<MyProfile />} />
+            <Route
+              path="/dashboard/employee-skills"
+              element={<EmployeeSkillsManager />}
+            />
+            <Route path="/dashboard/team" element={<Team />} />
+          </Routes>
+        </Layout>
+      </Router>
     </div>
   );
 }
