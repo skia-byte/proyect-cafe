@@ -287,7 +287,10 @@ function Team() {
               >
                 Cancelar
               </button>
-              <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-6 py-2 rounded-md"
+              >
                 {editingMember ? "Actualizar" : "Agregar"} Miembro
               </button>
             </div>
@@ -323,10 +326,15 @@ function Team() {
 
             {member.skills?.length > 0 && (
               <div className="mb-4">
-                <p className="text-xs font-medium text-gray-500 mb-2">HABILIDADES</p>
+                <p className="text-xs font-medium text-gray-500 mb-2">
+                  HABILIDADES
+                </p>
                 <div className="flex flex-wrap gap-1">
                   {member.skills.slice(0, 3).map((skill, index) => (
-                    <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                    <span
+                      key={index}
+                      className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+                    >
                       {skill}
                     </span>
                   ))}

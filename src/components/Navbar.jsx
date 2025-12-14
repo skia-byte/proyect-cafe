@@ -3,8 +3,14 @@ import logo from "../img/logonav.png";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import React from "react";
+import useDarkMode from "../Hooks/userDarkMode";
 
 function Navbar() {
+  const [theme, setTheme] = useDarkMode();
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
   const { user, isAdmin } = useAuth();
   const { items } = useCart(); // Productos del carrito
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +44,16 @@ function Navbar() {
             />
           </div>
 
+          <button
+            onClick={toggleTheme}
+            // USANDO GUIONES y aplicando los colores de modo claro y oscuro
+            className="p-2 rounded-full border border-cafe-claro dark:border-cafe-oscuro 
+             text-cafe-oscuro dark:text-cafe-claro 
+             bg-cafe-claro dark:bg-cafe-oscuro
+             transition-all"
+          >
+            {/* ... */}
+          </button>
           {/* Botón menú móvil */}
           <div className="md:hidden flex items-center">
             <button
