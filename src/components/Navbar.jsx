@@ -25,6 +25,7 @@ function Navbar() {
     { name: "Contáctanos", href: "/contact-us" },
     { name: "Libro de reclamaciones", href: "/complaints" },
     { name: "Misión y Visión", href: "/mission-vision" },
+    { name: "Publicidad", href: "/publicity" },
     { name: "Iniciar Sesión", href: "/login-form", requiresAuth: false },
     { name: "Carrito 🛒", href: "/cart" },
   ];

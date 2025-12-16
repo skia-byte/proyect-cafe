@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../FireBase/productsService";
 import CoffeeMenuItem from "../components/CoffeeMenuItem";
-
+import CoffeeQuiz from "./Quizz";
 const Menu = () => {
   const [products, setProducts] = useState([]);
 
@@ -26,7 +26,7 @@ const Menu = () => {
         </p>
         <div className="h-1 w-20 bg-amber-500 mx-auto mt-4"></div>
       </header>
-
+      <CoffeeQuiz />
       {/* Lista del Menú */}
       <section className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2">
