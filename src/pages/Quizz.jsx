@@ -13,13 +13,13 @@ const CoffeeQuiz = () => {
     {
       id: "dulce",
       preg: "🍯 Algo dulce",
-      nombre: "Frappuccino Caramelo",
+      nombre: "Affogato",
       color: "bg-yellow-600",
     },
     {
       id: "calor",
       preg: "❄️ Con calor",
-      nombre: "Iced Latte Vainilla",
+      nombre: "Cold Brew",
       color: "bg-blue-500",
     },
   ];

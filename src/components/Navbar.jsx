@@ -45,16 +45,6 @@ function Navbar() {
             />
           </div>
 
-          <button
-            onClick={toggleTheme}
-            // USANDO GUIONES y aplicando los colores de modo claro y oscuro
-            className="p-2 rounded-full border border-cafe-claro dark:border-cafe-oscuro 
-             text-cafe-oscuro dark:text-cafe-claro 
-             bg-cafe-claro dark:bg-cafe-oscuro
-             transition-all"
-          >
-            {/* ... */}
-          </button>
           {/* Botón menú móvil */}
           <div className="md:hidden flex items-center">
             <button
